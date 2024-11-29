@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../../../Components/Layout";
 import Heading from "../../../components/Heading";
 import AllOrdersTable from "../../../components/AdminTables/AllOrdersTable";
+import Layout from "../../../components/Layout";
 
 const AllOrders = () => {
   return (

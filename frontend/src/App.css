@@ -1,0 +1,447 @@
+.custom-underline {
+  position: relative;
+}
+
+.custom-underline::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 5px;
+  background-color: #FE4C50; 
+}
+.slick-arrow {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.slick-prev {
+  left: 10px;
+}
+
+.slick-next {
+  right: 10px;
+}
+
+.range-slider-container {
+  position: relative;
+  width: 100%;
+  height: 5px;
+  border-radius: 5px;
+}
+
+.range-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 5px;
+  position: absolute;
+  pointer-events: none;
+  background: none;
+}
+
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  background: #FE4C50;
+  cursor: pointer;
+  pointer-events: auto;
+  border-radius: 50%;
+  margin-top: -5px;
+}
+
+.range-slider::-webkit-slider-runnable-track {
+  height: 5px;
+  background: transparent;
+  pointer-events: none;
+}
+
+.range-slider::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  background: #FE4C50;
+  cursor: pointer;
+  pointer-events: auto;
+  border-radius: 50%;
+}
+
+.range-slider::-moz-range-track {
+  height: 5px;
+  background: transparent;
+}
+.MuiStepConnector-line{
+  display: none !important;
+}
+.MuiStepConnector-root{
+  height: 1px;
+  background: rgba(0, 0, 0, 0.349);
+}
+.MuiStepConnector-active,
+.MuiStepConnector-completed{
+  background: #FE4C50;
+}
+
+.shippingContainer{
+  width: 100vmax;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+  max-width: 100%;
+}
+.shippingBox{
+  width: 25vmax;
+  height: 90vh;
+  background: #fff;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.shippingHeading{
+  text-align: center;
+  color: rgb(0, 0, 0, 0.664);
+  margin: auto;
+  width: 60%;
+  font: 400 1.3vmax;
+  font-family: "Poppins";
+  border-bottom: 1px solid rgba(0, 0, 0, 0.205);
+  padding: 1.3vmax;
+}
+.shippingForm{
+  width: 70%;
+  display: flex;
+  transition: all ease .3s;
+  justify-content: space-evenly;
+  margin: auto;
+  height: 80%;
+  padding: 2vmax;
+  align-items: center;
+  flex-direction: column;
+}
+.shippingForm > div{
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.shippingForm > div > input,
+.shippingForm > div > select
+{
+  padding: 1vmax 4vmax;
+  padding-right: 1vmax;
+  border: 1px solid rgba(0, 0, 0, 0.267);
+  border-radius: 4px;
+  font: 300 0.9vmax cursive;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+.shippingForm > div > svg{
+  position: absolute;
+  font-size: 1.6vmax;
+  color: rgba(0, 0, 0, 0.623);
+  transform: translateX(1vmax);
+}
+.shipppingBtn{
+  color: #fff;
+  cursor: pointer;
+  transition: all ease .3s;
+  outline: none;
+  margin: 2vmax;
+  background: #FE4C50;
+  padding: 1vmax;
+  width: 100%;
+  font: 300 1vmax;
+  font-family: "Poppins";
+  border: none;
+}
+.shipppingBtn:hover{
+  background: rgb(179, 66, 46);
+}
+@media screen and (max-width: 600px) {
+  .shippingBox{
+      width: 100vw;
+      height: 95vh;
+  }
+  .shippingHeading{
+      padding: 5vw;
+      font: 400 6vw;
+      font-family: "Poppins";
+  }
+  .shippingForm{
+      padding: 11vw;
+  }
+  .shippingForm > div > input,
+  .shippingForm > div > select{
+      padding: 5vw 10vw;
+      font: 300 4vw cursive;
+  }
+  .shippingForm > div > svg{
+      font-size: 6vw;
+      transform: translateX(3vw);
+  }
+  .shipppingBtn{
+      font: 300 4vw "Poppins";
+      padding: 4vw;
+  } 
+}
+
+
+.confirmOrderPage{
+  height: 100vh;
+  display: grid;
+  background: white;
+  grid-template-columns: 6fr 3fr;
+}
+.confirmOrderPage > div:last-child{
+  border-left: 1px solid rgba(0, 0, 0, 0.247);
+}
+.confirmShippingArea{
+  padding: 5vmax;
+  border-bottom: 0%;
+}
+.confirmShippingArea > p{
+  font: 400 1.8vmax "Poppins";
+}
+.shippingInfoAreaBox,
+.confirmCartItemContainer{
+  margin: 2vmax;
+}
+.shippingInfoAreaBox > div{
+  display: flex;
+  margin: 1vmax 0;
+}
+.shippingInfoAreaBox > div > p{
+  font: 400 1vmax "Poppins";
+  color: black;
+}
+.shippingInfoAreaBox > div > span{
+  font: 100 1vmax "Poppins";
+  color: #575757;
+  margin: 0 1vmax;
+}
+.confirmCartItems > p{
+  font: 400 1.8vmax "Poppins";
+}
+.confirmCartItems{
+  padding: 5vmax;
+  padding-top: 2vmax;
+}
+.confirmCartItemContainer{
+  max-height: 20vmax;
+  overflow-y: auto;
+}
+.confirmCartItemContainer > div{
+  display: flex;
+  justify-content: space-between;
+  font: 400 1vmax "Poppins";
+  margin: 2vmax 0;
+  align-items: center;
+}
+.confirmCartItemContainer > div img{
+  width: 3vmax;
+}
+.confirmCartItemContainer > div > a{
+  width: 60%;
+  text-decoration: none;
+  margin: 0 2vmax;
+  color: #575757;
+}
+.confirmCartItemContainer > div > span{
+  font: 100 1vmax "Poppins";
+  color: #5e5e5e;
+}
+.orderSummary{
+  padding: 7vmax;
+}
+.orderSummary > p{
+  text-align: center;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.267); 
+  width: 100%;
+  padding: 1vmax;
+  font: 400 1.8vmax "Poppins";
+}
+.orderSummary > div > div{
+  display: flex;
+  justify-content: space-between;
+  margin: 2vmax 0;
+  font: 300 1vmax "Poppins";
+}
+.orderSummary > div > div > span{
+  color: rgba(0, 0, 0, 0.692);
+}
+.orderSummaryTotal{
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgba(0, 0, 0, 0.362);
+  padding: 2vmax 0;
+  font: 300 1vmax "Poppins";
+}
+.orderSummary > button{
+  padding: 10px;
+  margin: auto;
+  background: #FE4C50;
+  color: #fff;
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  font: 400 1vmax "Roboto";
+  transition: all ease .3s;
+}
+
+
+
+@media screen and (max-width: 600px) {
+  .confirmOrderPage{
+      grid-template-columns: 1fr;
+      height: unset;
+  }
+  .confirmOrderPage > div:last-child{
+      border-left: 0;
+      border-top: rgb(0, 0, 0. 0.247);
+  }
+  .confirmShippingArea > p{
+      font: 400 6vw "Poppins";
+  }
+  .shippingInfoAreaBox > div{
+      display: flex;
+      margin: 6vw 0;
+  }
+  .shippingInfoAreaBox > div > p{
+      font: 400 4vw "Poppins";
+  }
+  .shippingInfoAreaBox > div > span{
+      font: 100 4vw "Poppins";
+  }
+  .confirmCartItems > p{
+      font: 400 6vw "Poppins";
+  }
+  .confirmCartItemContainer{
+      max-height: 50vw;
+  }
+  .confirmCartItemContainer > div{
+      font: 400 4vmax "Poppins";
+      margin: 4vw 0;
+  }
+  .confirmCartItemContainer > img{
+      width: 10vw;
+  }
+  .confirmCartItemContainer > div > a{
+      margin: 0;
+      width: 30%;
+      font: 100 4vw "Poppins";
+  }
+  .confirmCartItemContainer > div > span{
+      font: 100 4vw "Poppins";
+  }
+  .orderSummary{
+      padding: 12vw;
+  }
+  .orderSummary > p{
+      padding: 4vw;
+      font: 400 6vw "Poppins";
+  }
+  .orderSummary > div > div{
+      font: 300 4vw "Poppins";
+  }
+  .orderSummaryTotal{
+      padding: 5vw 0;
+      font: 300 4vw "Poppins";
+  }
+  .orderSummary > button{
+      padding: 4vw ;
+      margin: 4vw auto;
+      font: 400 4vw "Poppins";
+
+  }
+}
+
+.paymentContainer{
+  display: grid;
+  place-items: center;
+  margin: 2vmax;
+  background: white;
+  height: 50vh;
+}
+.paymentForm{
+  width: 22%;
+  height: 100%;
+}
+.paymentForm > p{
+  font: 400 2vmax "Poppins";
+  color: rgba(0, 0,0,0.753);
+  border-bottom: 1px solid rgb(0, 0, 0, 0.13);
+  width: 50%;
+  margin: auto;
+  text-align: center;
+  padding: 1vmax 0;
+}
+.paymentForm > div{
+  display: flex;
+  align-items: center;
+  margin: 2vmax 0;
+}
+.paymentInput{
+  padding: 1vmax 4vmax;
+  padding-right: 1vmax;
+  width: 100%;
+  box-sizing: border-box;
+  border: solid 1px rgba(0, 0,0, 0.267);
+  border-radius: 4px;
+  outline: none;
+}
+.paymentForm > div >svg{
+  position: absolute;
+  transform: translateX(1vmax);
+  font-size: 1.6vmax;
+  color: rgba(0, 0, 0, 0.623);
+}
+/* .paymentBtn{
+  outline: none;
+  border: none;
+  background: #FE4C50;
+  cursor: pointer;
+  color: white;
+  transition: all ease .3s;
+  outline: none;
+  width: 10%;
+  padding: 0.8vmax;
+  font: 300 0.9vmax "Roboto";
+} */
+.paymentBtn:hover{
+  background: rgb(179, 66, 46);
+}
+
+@media screen and (max-width: 600px) {
+  .paymentForm{
+      width: 90%;
+  }
+  .paymentForm > p{
+      font: 400 8vw "Poppins";
+      width: 60%;
+      padding: 4vw 0;
+  }
+  .paymentForm > div{
+      margin: 10vw 0;
+      display: flex;
+      align-items: center;
+  }
+  .paymentInput{
+      padding: 4vw 10vw;
+  }
+  .paymentForm > div > svg{
+      font-size: 6vw;
+  }
+  .paymentBtn{
+      font: 300 4vw "Poppins";
+      padding: 4vw;
+  }
+
+  
+}
+

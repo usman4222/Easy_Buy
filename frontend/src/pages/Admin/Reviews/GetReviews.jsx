@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import Layout from "../../../../Components/Layout";
-import Heading from "../../../../components/Heading";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllReviews,
   getProductDetails,
-} from "../../../../actions/productsAction";
+} from "../../../actions/productsAction";
 import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa"; // Import star icons
+import Layout from "../../../components/Layout";
+import Heading from "../../../components/Heading";
 
 const GetReviews = () => {
   const [productId, setProductId] = useState(""); // State for product ID input

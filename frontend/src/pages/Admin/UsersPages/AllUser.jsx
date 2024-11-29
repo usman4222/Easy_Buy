@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../../../../Components/Layout";
-import Heading from "../../../../components/Heading";
-import AllUsersTable from "../../../../components/AdminTables/AllUsersTable";
+import Layout from "../../../Components/Layout";
+import Heading from "../../../components/Heading";
+import AllUsersTable from "../../../components/AdminTables/AllUsersTable";
 
 const AllUser = () => {
   return (

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Layout from "../../../../Components/Layout";
-import BackButton from "../../../../components/BackButton";
-import Heading from "../../../../components/Heading";
+import BackButton from "../../../components/BackButton";
+import Heading from "../../../components/Heading";
 import { useDispatch, useSelector } from "react-redux";
-import { NEW_PRODUCT_RESET } from "../../../../redux/productSlice/productSlice";
-import { updateProduct, getProducts, getProductDetails } from "../../../../actions/productsAction";
+import { NEW_PRODUCT_RESET } from "../../../redux/productSlice/productSlice";
+import { updateProduct, getProducts, getProductDetails } from "../../../actions/productsAction";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Spinner } from "flowbite-react";
-import { UPDATE_PRODUCT_RESET } from "../../../../redux/productSlice/updateProduct";
+import { UPDATE_PRODUCT_RESET } from "../../../redux/productSlice/updateProduct";
+import Layout from "../../../components/Layout";
 
 const UpdateProduct = () => {
   const dispatch = useDispatch();

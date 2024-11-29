@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Layout from "../../../../Components/Layout";
-import BackButton from "../../../../components/BackButton";
-import Heading from "../../../../components/Heading";
+import BackButton from "../../../components/BackButton";
+import Heading from "../../../components/Heading";
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors } from "../../../../actions/UserAction";
-import { NEW_PRODUCT_RESET } from "../../../../redux/productSlice/productSlice";
-import { createProduct } from "../../../../actions/productsAction";
+import { clearErrors } from "../../../actions/UserAction";
+import { NEW_PRODUCT_RESET } from "../../../redux/productSlice/productSlice";
+import { createProduct } from "../../../actions/productsAction";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-circular-progressbar/dist/styles.css";
 import { Spinner } from "flowbite-react";
+import Layout from "../../../components/Layout";
 
 const AddProduct = () => {
   const navigate = useNavigate();

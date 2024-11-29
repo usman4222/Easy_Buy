@@ -4,7 +4,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { AiFillProduct } from "react-icons/ai";
-import Layout from "../../../Components/Layout";
+import Layout from "../../../components/Layout";
 
 export default function Dashboard() {
 

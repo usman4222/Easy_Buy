@@ -9,6 +9,9 @@ process.on("uncaughtException", (error) => {
     console.log(`Server is closing due to uncaught exception error`);
     process.exit(1);
 });
+console.log('MongoDB URI:', process.env.MONGO_URI);
+
+
 
 dataBase();
 

@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import CheckOutProcessPage from "../../pages/CheckOutProcessPage";
 import MetaData from '../MetaData'

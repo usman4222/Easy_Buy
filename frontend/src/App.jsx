@@ -1,5 +1,5 @@
 // App.js
-import React from "react";
+import React from 'react';
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import "./App.css";
 import { useSelector } from "react-redux";

@@ -1,4 +1,4 @@
-import User from "../models/Usermodel.js"
+import User from "../models/userModel.js"
 import bcryptjs from "bcryptjs"
 import { createToken } from "../utils/createToken.js"
 import catchAsyncError from "../middleware/catchAsyncError.js"

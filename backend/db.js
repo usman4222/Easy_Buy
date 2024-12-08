@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 
 export const dataBase = () => {
 
-    mongoose.connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/easy-buy")
+    mongoose.connect(process.env.MONGO_URI )
         .then(() => {
             console.log('MongoDB is connected');
         })

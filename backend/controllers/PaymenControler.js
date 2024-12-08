@@ -30,9 +30,11 @@ export const createCheckOut = catchAsyncError(async (req, res, next) => {
   }));
 
   const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+  console.log("Stripe API key", process.env.STRIPE_SECRET_KEY);
+  
   console.log("lineItems", lineItems);
+  console.log("stripe", stripe);
 
-  // navigate("/success");
   try {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],

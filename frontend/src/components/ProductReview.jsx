@@ -6,9 +6,9 @@ import {
   newReview,
 } from "../actions/productsAction";
 import { useDispatch, useSelector } from "react-redux";
-import { NEW_REVIEW_RESET } from "../redux/reviewSlice/addReview";
+import { CLEAR_ERRORS, NEW_REVIEW_RESET } from "../redux/reviewSlice/addReview";
 import { useParams } from "react-router-dom";
-import { CLEAR_ERRORS } from "../redux/reviewSlice/allReviews";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

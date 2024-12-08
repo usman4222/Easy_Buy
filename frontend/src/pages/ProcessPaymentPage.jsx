@@ -31,7 +31,7 @@ const ProcessPaymentPage = () => {
     const verifyPayment = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4000/api/stripe/verify-session/${sessionId}`,
+          `https://easy-buy-s9rh.vercel.app/api/stripe/verify-session/${sessionId}`,
           {
             method: "GET",
             credentials: "include",

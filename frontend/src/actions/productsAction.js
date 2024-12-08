@@ -45,6 +45,9 @@ import {
   ADMIN_PRODUCT_FAIL,
 } from "../redux/productSlice/GetAllAdminProduct";
 
+// let apiurl = "https://easy-buy-s9rh.vercel.app"
+let apiurl = "http://localhost:4000"
+
 export const getProducts =
   (
     keyword = "",
@@ -69,7 +72,7 @@ export const getProducts =
         queryParams.append("category", category);
       }
 
-      const apiEndpoint = `http://localhost:4000/api/product/get-product?${queryParams}`;
+      const apiEndpoint = `${apiurl}/api/product/get-product?${queryParams}`;
 
       const { data } = await axios.get(apiEndpoint);
 
@@ -98,7 +101,7 @@ export const getAminProducts = () => async (dispatch) => {
     };
 
     const { data } = await axios.get(
-      "http://localhost:4000/api/product/admin/products",
+      `${apiurl}/api/product/admin/products`,
       config
     );
 
@@ -126,7 +129,7 @@ export const createProduct = (productData) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.post(
-      `http://localhost:4000/api/product/admin/create-product`,
+      `${apiurl}/api/product/admin/create-product`,
       productData,
       config
     );
@@ -160,7 +163,7 @@ export const updateProduct = (id, productData) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.put(
-      `http://localhost:4000/api/product/admin/update-product/${id}`,
+      `${apiurl}/api/product/admin/update-product/${id}`,
       productData,
       config
     );
@@ -189,7 +192,7 @@ export const getProductDetails = (id) => async (dispatch) => {
 
     // Correct API call
     const { data } = await axios.get(
-      `http://localhost:4000/api/product/product-detail/${id}`
+      `${apiurl}/api/product/product-detail/${id}`
     );
 
     dispatch({
@@ -217,7 +220,7 @@ export const delProduct = (id) => async (dispatch) => {
     };
 
     const { data } = await axios.delete(
-      `http://localhost:4000/api/product/admin/delete-product/${id}`,
+      `${apiurl}/api/product/admin/delete-product/${id}`,
       config
     );
 
@@ -247,7 +250,7 @@ export const newReview = (reviewData) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.put(
-      `http://localhost:4000/api/product/create-product-review`,
+      `${apiurl}/api/product/create-product-review`,
       reviewData,
       config
     );
@@ -269,7 +272,7 @@ export const getAllReviews = (id) => async (dispatch) => {
     dispatch({ type: ALL_REVIEW_REQUEST });
 
     const { data } = await axios.get(
-      `http://localhost:4000/api/product/get-product-reviews/${id}`
+      `${apiurl}/api/product/get-product-reviews/${id}`
     );
 
     dispatch({
@@ -291,7 +294,7 @@ export const deleteReview = (reviewId, productId) => async (dispatch) => {
     });
 
     const { data } = await axios.delete(
-      `/api/v1/reviews?id=${reviewId}&productId=${productId}`
+      `${apiurl}/api/v1/reviews?id=${reviewId}&productId=${productId}`
     );
 
     dispatch({

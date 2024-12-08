@@ -117,7 +117,7 @@ const OrderInfo = () => {
                   </h6>
                   <div className="flex w-fit p-[6px_14px] rounded-[20px] bg-[rgba(209,250,229,0.5)] ">
                     <span className="text-[#059691] font-inter text-base font-medium">
-                      {order.paymentInfo.status}
+                      {order.paymentInfo && order.paymentInfo.status}
                     </span>
                   </div>
                 </div>

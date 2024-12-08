@@ -1,5 +1,6 @@
 import axios from "axios";
 import {
+  CLEAR_ERROR,
   CREATE_ORDER_FAIL,
   CREATE_ORDER_REQUEST,
   CREATE_ORDER_SUCCESS,
@@ -22,6 +23,10 @@ import {
 import { MY_ORDER_FAIL, MY_ORDER_REQUEST, MY_ORDER_SUCCESS } from "../redux/orderSlice/myOrders";
 import { DELETE_ORDER_FAIL, DELETE_ORDER_REQUEST, DELETE_ORDER_SUCCESS } from "../redux/orderSlice/deleteOrder";
 
+// let apiurl = "https://easy-buy-s9rh.vercel.app"
+let apiurl = "http://localhost:4000"
+
+
 export const createOrder = (order) => async (dispatch) => {
   try {
     dispatch({ type: CREATE_ORDER_REQUEST });
@@ -33,7 +38,7 @@ export const createOrder = (order) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.post(
-      "http://localhost:4000/api/order/new-order",
+      `${apiurl}/api/order/new-order`,
       order,
       config
     );
@@ -65,7 +70,7 @@ export const myOrders = () => async (dispatch) => {
     };
 
     const { data } = await axios.get(
-      "http://localhost:4000/api/order/my-orders",
+      `${apiurl}/api/order/my-orders`,
       config
     );
     dispatch({
@@ -92,7 +97,7 @@ export const getAllOrders = () => async (dispatch) => {
     };
 
     const { data } = await axios.get(
-      "http://localhost:4000/api/order/admin/orders",
+      `${apiurl}/api/order/admin/orders`,
       config
     );
     dispatch({
@@ -116,7 +121,7 @@ export const updateOrder = (id, order) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.put(
-      `http://localhost:4000/api/order/admin/update-order-status/${id}`,
+      `${apiurl}/api/order/admin/update-order-status/${id}`,
       order,
       config
     );
@@ -140,7 +145,7 @@ export const deleteOrder = (id) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.delete(
-      `http://localhost:4000/api/order/admin/delete-order/${id}`,
+      `${apiurl}/api/order/admin/delete-order/${id}`,
       config
     );
     dispatch({
@@ -165,7 +170,7 @@ export const getOrderDetails = (id) => async (dispatch) => {
     };
 
     const { data } = await axios.get(
-      `http://localhost:4000/api/order/order-detail/${id}`,
+      `${apiurl}/api/order/order-detail/${id}`,
       config
     );
     console.log("data", data);

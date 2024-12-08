@@ -42,6 +42,9 @@ import {
 } from "../redux/userSlice/allUsersSlice";
 // import { persistor } from '../redux/store';
 
+// let apiurl = "https://easy-buy-s9rh.vercel.app"
+let apiurl = "http://localhost:4000"
+
 export const login = (userData) => async (dispatch) => {
   try {
     dispatch(LOGIN_REQUEST());
@@ -54,7 +57,7 @@ export const login = (userData) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "http://localhost:4000/api/user/login",
+      `${apiurl}/api/user/login`,
       userData,
       config
     );
@@ -112,7 +115,7 @@ export const register = (userData) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.post(
-      `http://localhost:4000/api/user/register`,
+      `${apiurl}/api/user/register`,
       userData,
       config
     );
@@ -133,7 +136,7 @@ export const load = () => async (dispatch) => {
       type: LOAD_REQUEST,
     });
 
-    const { data } = await axios.get(`/api/v1/me`);
+    const { data } = await axios.get(`${apiurl}/api/v1/me`);
     dispatch({
       type: LOAD_SUCCESS,
       payload: data.user,
@@ -155,7 +158,7 @@ export const logout = () => async (dispatch) => {
       withCredentials: true,
     };
 
-    await axios.post("http://localhost:4000/api/user/logout", config);
+    await axios.post(`${apiurl}/api/user/logout`, config);
 
     console.log("Dispatching LOGOUT_SUCCESS...");
     dispatch(LOGOUT_SUCCESS());
@@ -183,7 +186,7 @@ export const updateProfile = (userData, userId) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:4000/api/user/me/update/${userId}`,
+      `${apiurl}/api/user/me/update/${userId}`,
       userData,
       config
     ); 
@@ -210,7 +213,7 @@ export const updatePassword = (passwords) => async (dispatch) => {
 
     const config = { headers: { "Content-Type": "application/json" } };
     const { data } = await axios.put(
-      `/api/v1/password/update`,
+      `${apiurl}/api/v1/password/update`,
       passwords,
       config
     );
@@ -241,7 +244,7 @@ export const forgotPasswordAction = (email) => async (dispatch) => {
     });
 
     const config = { headers: { "Content-Type": "application/json" } };
-    const { data } = await axios.post(`/api/v1/password/forgot`, email, config);
+    const { data } = await axios.post(`${apiurl}/api/v1/password/forgot`, email, config);
     dispatch({
       type: FORGOT_PASSWORD_SUCCESS,
       payload: data.message,
@@ -262,7 +265,7 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
 
     const config = { headers: { "Content-Type": "application/json" } };
     const { data } = await axios.put(
-      `/api/v1/password/reset/${token}`,
+      `${apiurl}/api/v1/password/reset/${token}`,
       passwords,
       config
     );
@@ -290,7 +293,7 @@ export const getAllUsers = () => async (dispatch) => {
     };
 
     const { data } = await axios.get(
-      `http://localhost:4000/api/user/admin/users`,
+      `${apiurl}/api/user/admin/users`,
       config
     );
 
@@ -307,7 +310,7 @@ export const getUserDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: USER_DETAIL_REQUEST });
 
-    const { data } = await axios.get(`/api/v1/admin/user/${id}`);
+    const { data } = await axios.get(`${apiurl}/api/v1/admin/user/${id}`);
 
     dispatch({ type: USER_DETAIL_SUCCESS, payload: data.user });
   } catch (error) {
@@ -330,7 +333,7 @@ export const updateUser = (id, userData) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.put(
-      `http://localhost:4000/api/user/admin/user/${id}/role`,
+      `${apiurl}/api/user/admin/user/${id}/role`,
       userData,
       config
     );
@@ -359,7 +362,7 @@ export const deleteUser = (id) => async (dispatch) => {
         withCredentials: true,
       };
 
-    const { data } = await axios.delete(`http://localhost:4000/api/user/admin/user/${id}`, config);
+    const { data } = await axios.delete(`${apiurl}/api/user/admin/user/${id}`, config);
     dispatch({
       type: USER_DELETE_SUCCESS,
       payload: data,

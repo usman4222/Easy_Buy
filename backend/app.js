@@ -11,7 +11,7 @@ import bodyParser from "body-parser";
 import orderRoutes from "./routes/orderRoute.js";
 import ErrorHandler from "./utils/errorHandler.js";  
 import Stripe from 'stripe';
-
+ 
 const app = express();
 
 dotenv.config();  
@@ -20,11 +20,12 @@ dotenv.config();
 
 const allowedOrigins = [
   "http://localhost:5173", // Local development
-  "https://easy-buy-s9rh.vercel.app", // Vercel deployed app
+  "https://easy-buy-g2ec-9dln1ubg0-rana-usmans-projects.vercel.app/"
+
 ];
 
 app.use(cors({
-    origin: "*", 
+    origin: allowedOrigins, 
     credentials: true, 
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],

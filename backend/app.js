@@ -20,12 +20,18 @@ dotenv.config();
 
 const allowedOrigins = [
   "http://localhost:5173", // Local development
-  "https://easy-buy-g2ec-9dln1ubg0-rana-usmans-projects.vercel.app/"
+  "https://easy-buy-hm3t.vercel.app/"
 
 ];
 
 app.use(cors({
-    origin: allowedOrigins, 
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true); // Allow the request
+    } else {
+        callback(new Error("Not allowed by CORS")); // Block the request
+    }
+},
     credentials: true, 
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],

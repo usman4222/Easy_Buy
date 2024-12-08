@@ -45,8 +45,8 @@ import {
   ADMIN_PRODUCT_FAIL,
 } from "../redux/productSlice/GetAllAdminProduct";
 
-// let apiurl = "https://easy-buy-s9rh.vercel.app"
-let apiurl = "http://localhost:4000"
+let apiurl = "https://easy-buy-s9rh.vercel.app"
+// let apiurl = "http://localhost:4000"
 
 export const getProducts =
   (

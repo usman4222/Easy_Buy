@@ -19,7 +19,7 @@ dotenv.config();
 // Middleware
 
 const allowedOrigins = [
-  "http://localhost:5173", // Local development
+  "http://localhost:5173", 
   "https://easy-buy-hm3t.vercel.app/"
 
 ];
@@ -27,9 +27,9 @@ const allowedOrigins = [
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true); // Allow the request
+        callback(null, true); 
     } else {
-        callback(new Error("Not allowed by CORS")); // Block the request
+        callback(new Error("Not allowed by CORS")); 
     }
 },
     credentials: true, 

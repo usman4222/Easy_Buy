@@ -29,7 +29,7 @@ let apiurl = "https://easy-buy-s9rh.vercel.app"
 
 export const createOrder = (order) => async (dispatch) => {
   try {
-    dispatch({ type: CREATE_ORDER_REQUEST });
+    dispatch(CREATE_ORDER_REQUEST());
 
     console.log("Order being sent:", order);
 
@@ -45,24 +45,16 @@ export const createOrder = (order) => async (dispatch) => {
 
     console.log("order data", data);
 
-    dispatch({
-      type: CREATE_ORDER_SUCCESS,
-      payload: data,
-    });
+    dispatch(CREATE_ORDER_SUCCESS(data));
   } catch (error) {
     console.error("Error creating order:", error);
-    dispatch({
-      type: CREATE_ORDER_FAIL,
-      payload: error.response?.data?.message || error.message,
-    });
+    dispatch(CREATE_ORDER_FAIL(error.response?.data?.message || error.message));
   }
 };
 
 export const myOrders = () => async (dispatch) => {
   try {
-    dispatch({
-      type: MY_ORDER_REQUEST,
-    });
+    dispatch(MY_ORDER_REQUEST());
 
     const config = {
       headers: { "Content-Type": "application/json" },
@@ -73,23 +65,19 @@ export const myOrders = () => async (dispatch) => {
       `${apiurl}/api/order/my-orders`,
       config
     );
-    dispatch({
-      type: MY_ORDER_SUCCESS,
-      payload: data.orders,
-    });
+
+    console.log("my orders",data);
+    
+
+    dispatch(MY_ORDER_SUCCESS(data.orders));
   } catch (error) {
-    dispatch({
-      type: MY_ORDER_FAIL,
-      payload: error.response.data.message,
-    });
+    dispatch(MY_ORDER_FAIL(error.response.data.message));
   }
 };
 
 export const getAllOrders = () => async (dispatch) => {
   try {
-    dispatch({
-      type: ALL_ORDER_REQUEST,
-    });
+    dispatch(ALL_ORDER_REQUEST());
 
     const config = {
       headers: { "Content-Type": "application/json" },
@@ -100,22 +88,16 @@ export const getAllOrders = () => async (dispatch) => {
       `${apiurl}/api/order/admin/orders`,
       config
     );
-    dispatch({
-      type: ALL_ORDER_SUCCESS,
-      payload: data.orders,
-    });
+    dispatch(ALL_ORDER_SUCCESS(data.orders));
     console.log(data);
   } catch (error) {
-    dispatch({
-      type: ALL_ORDER_FAIL,
-      payload: error.response.data.message,
-    });
+    dispatch(ALL_ORDER_FAIL( error.response.data.message));
   }
 };
 
 export const updateOrder = (id, order) => async (dispatch) => {
   try {
-    dispatch({ type: UPDATE_ORDER_REQUEST });
+    dispatch(UPDATE_ORDER_REQUEST());
     const config = {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
@@ -125,21 +107,15 @@ export const updateOrder = (id, order) => async (dispatch) => {
       order,
       config
     );
-    dispatch({
-      type: UPDATE_ORDER_SUCCESS,
-      payload: data.success,
-    });
+    dispatch(UPDATE_ORDER_SUCCESS(data.success));
   } catch (error) {
-    dispatch({
-      type: UPDATE_ORDER_FAIL,
-      payload: error.response.data.message,
-    });
+    dispatch(UPDATE_ORDER_FAIL(error.response.data.message));
   }
 };
 
 export const deleteOrder = (id) => async (dispatch) => {
   try {
-    dispatch({ type: DELETE_ORDER_REQUEST });
+    dispatch(DELETE_ORDER_REQUEST());
     const config = {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
@@ -148,21 +124,15 @@ export const deleteOrder = (id) => async (dispatch) => {
       `${apiurl}/api/order/admin/delete-order/${id}`,
       config
     );
-    dispatch({
-      type: DELETE_ORDER_SUCCESS,
-      payload: data.success,
-    });
+    dispatch(DELETE_ORDER_SUCCESS(data.success));
   } catch (error) {
-    dispatch({
-      type: DELETE_ORDER_FAIL,
-      payload: error.response.data.message,
-    });
+    dispatch(DELETE_ORDER_FAIL(error.response.data.message));
   }
 };
 
 export const getOrderDetails = (id) => async (dispatch) => {
   try {
-    dispatch({ type: ORDER_DETAILS_REQUEST });
+    dispatch(ORDER_DETAILS_REQUEST());
 
     const config = {
       headers: { "Content-Type": "application/json" },
@@ -175,21 +145,14 @@ export const getOrderDetails = (id) => async (dispatch) => {
     );
     console.log("data", data);
 
-    dispatch({
-      type: ORDER_DETAILS_SUCCESS,
-      payload: data.order,
-    });
+    dispatch(ORDER_DETAILS_SUCCESS(data.order)); 
   } catch (error) {
-    dispatch({
-      type: ORDER_DETAILS_FAIL,
-      payload: error.response.data.message,
-      message: `Error while fetching order details: ${error.message}`,
-    });
+    console.error("Error fetching order details:", error); 
+    dispatch(ORDER_DETAILS_FAIL(error.response?.data?.message || "Server Error"));
   }
 };
 
+
 export const clearErrors = () => async (dispatch) => {
-  dispatch({
-    type: CLEAR_ERROR,
-  });
+  dispatch(CLEAR_ERROR);
 };

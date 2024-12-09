@@ -174,9 +174,7 @@ export const logout = () => async (dispatch) => {
 
 export const updateProfile = (userData, userId) => async (dispatch) => {
   try {
-    dispatch({
-      type: UPDATE_PROFILE_REQUEST,
-    });
+    dispatch(UPDATE_PROFILE_REQUEST());
 
     const config = {
       headers: {
@@ -191,16 +189,10 @@ export const updateProfile = (userData, userId) => async (dispatch) => {
       config
     ); 
 
-    dispatch({
-      type: UPDATE_PROFILE_SUCCESS,
-      payload: data,
-    });
+    dispatch(UPDATE_PROFILE_SUCCESS(data));
     console.log("User details updated successfully", data);
   } catch (error) {
-    dispatch({
-      type: UPDATE_PROFILE_FAIL,
-      payload: error.response,
-    });
+    dispatch(UPDATE_PROFILE_FAIL(error.response));
     console.log("This is error while updating user", error);
   }
 };
@@ -283,7 +275,7 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
 
 export const getAllUsers = () => async (dispatch) => {
   try {
-    dispatch({ type: ALL_USERS_REQUEST });
+    dispatch(ALL_USERS_REQUEST());
 
     const config = {
       headers: {
@@ -297,34 +289,27 @@ export const getAllUsers = () => async (dispatch) => {
       config
     );
 
-    dispatch({ type: ALL_USERS_SUCCESS, payload: data.users });
+    dispatch(ALL_USERS_SUCCESS(data.users));
   } catch (error) {
-    dispatch({
-      type: ALL_USERS_FAIL,
-      payload: error.response.data.message,
-    });
+    dispatch(ALL_USERS_FAIL(error.response.data.message));
   }
 };
 
 export const getUserDetails = (id) => async (dispatch) => {
   try {
-    dispatch({ type: USER_DETAIL_REQUEST });
+    dispatch(USER_DETAIL_REQUEST());
 
     const { data } = await axios.get(`${apiurl}/api/v1/admin/user/${id}`);
 
-    dispatch({ type: USER_DETAIL_SUCCESS, payload: data.user });
+    dispatch(USER_DETAIL_SUCCESS(data.user));
   } catch (error) {
-    dispatch({
-      type: USER_DETAIL_FAIL,
-      payload: error.response.data.message,
-      message: "Error while getting details",
-    });
+    dispatch(USER_DETAIL_FAIL(error.response.data.message));
   }
 };
 
 export const updateUser = (id, userData) => async (dispatch) => {
   try {
-    dispatch({ type: UPDATE_USER_REQUEST });
+    dispatch(UPDATE_USER_REQUEST());
 
     const config = {
       headers: {
@@ -338,22 +323,15 @@ export const updateUser = (id, userData) => async (dispatch) => {
       config
     );
     console.log(userData);
-    dispatch({
-      type: UPDATE_USER_SUCCESS,
-      payload: data.success,
-    });
+    dispatch(UPDATE_USER_SUCCESS(data.success));
   } catch (error) {
-    dispatch({
-      type: UPDATE_USER_FAIL,
-      payload: error.response.data.message,
-      message: "Error while getting update",
-    });
+    dispatch(UPDATE_USER_FAIL(error.response.data.message));
   }
 };
 
 export const deleteUser = (id) => async (dispatch) => {
   try {
-    dispatch({ type: USER_DELETE_REQUEST });
+    dispatch(USER_DELETE_REQUEST());
 
     const config = {
         headers: {
@@ -363,20 +341,12 @@ export const deleteUser = (id) => async (dispatch) => {
       };
 
     const { data } = await axios.delete(`${apiurl}/api/user/admin/user/${id}`, config);
-    dispatch({
-      type: USER_DELETE_SUCCESS,
-      payload: data,
-    });
+    dispatch(USER_DELETE_SUCCESS(data));
   } catch (error) {
-    dispatch({
-      type: USER_DELETE_FAIL,
-      payload: error.response.data.message,
-    });
+    dispatch(USER_DELETE_FAIL(error.response.data.message));
   }
 };
 
 export const clearErrors = () => async (dispatch) => {
-  dispatch({
-    type: CLEAR_ERRORS,
-  });
+  dispatch(CLEAR_ERRORS());
 };

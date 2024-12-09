@@ -28,14 +28,14 @@ const OrderInfo = () => {
   const [status, setStatus] = useState("");
   const navigate = useNavigate()
 
-  console.log("order", order);
+  console.log("admin order", order);
 
   const { id } = useParams();
 
   useEffect(() => {
     if (isUpdated) {
       toast.success("Order Updated Successfully");
-      dispatch({ type: UPDATE_ORDER_RESET });
+      dispatch(UPDATE_ORDER_RESET());
     }
     if (deleteError) {
       alert.error(deleteError);
@@ -44,7 +44,7 @@ const OrderInfo = () => {
     if (isDeleted) {
       toast.success("Order Deleted Successfully");
       navigate("/orders")
-      dispatch({ type: DELETE_PRODUCT_RESET });
+      dispatch(DELETE_PRODUCT_RESET());
     }
     dispatch(getOrderDetails(id));
   }, [error, alert, id, dispatch, isUpdated, updateError]);

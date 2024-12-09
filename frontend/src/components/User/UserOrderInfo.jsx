@@ -18,14 +18,18 @@ const UserOrderInfo = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  console.log("order",order);
-  
+  console.log("single order", order);
 
   useEffect(() => {
-    dispatch(getOrderDetails(id));
-  }, [id, dispatch]);
+      dispatch(getOrderDetails(id));
+  }, [dispatch, id]);
 
-
+  if (error) {
+    return <div>Error fetching order details: {error}</div>;
+  }
+  if (loading || !order) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="lg:p-20 p-5 h-auto">
@@ -67,26 +71,26 @@ const UserOrderInfo = () => {
                 </h6>
                 <div className="flex w-fit p-[6px_14px] rounded-[20px] bg-[rgba(209,250,229,0.5)] ">
                   <span className="text-[#059691] font-inter text-base font-medium">
-                    {order.paymentInfo.status}
+                    {order?.paymentInfo?.status || "N/A"}
                   </span>
                 </div>
               </div>
             </div>
             <div className="bg-[#E9E9E9] rounded-full w-[189.004px] h-[189.004px] flex justify-center items-center my-3">
-              <img src= {currentUser.profileImage} alt="user" />
+              <img src={currentUser.profileImage} alt="user" />
             </div>
           </div>
           <div className="flex  flex-col xl:flex-row  justify-between w-full xl:items-center gap-5  ">
             <div className="flex flex-col gap-[5.94px]">
               <h4 className="text-[#1E293B] font-inter text-2xl font-semibold leading-[28px]">
-               {currentUser.username}
+                {currentUser.username}
               </h4>
               <div className="flex items-center gap-[12px]">
                 <h6 className="text-[#B0B0B0] font-inter text-[16.389px] font-medium leading-[22px]">
                   Order By:
                 </h6>
                 <span className="text-[#14171D] font-inter text-lg font-normal leading-[22px]">
-                {currentUser._id}
+                  {currentUser._id}
                 </span>
               </div>
               <div className="flex items-center gap-[12px]">
@@ -94,7 +98,7 @@ const UserOrderInfo = () => {
                   Email:
                 </h6>
                 <span className="text-[#14171D] font-inter text-lg font-normal leading-[22px]">
-                {currentUser.email}
+                  {currentUser.email}
                 </span>
               </div>
             </div>
@@ -166,7 +170,7 @@ const UserOrderInfo = () => {
                 Tax Charges
               </h6>
               <span className="text-[#14171D] font-inter text-lg font-normal leading-[22px]">
-                ${order.taxPrice.toFixed(2)}
+                ${order.taxPrice.toFixed(2) || "00.0"}
               </span>
             </div>
             <div className="flex justify-between items-center">

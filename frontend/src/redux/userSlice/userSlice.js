@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_FAIL } from "../../constants/UserConstant";
 
 const initialState = {
     currentUser: null,

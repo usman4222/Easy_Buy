@@ -9,7 +9,6 @@ process.on("uncaughtException", (error) => {
     console.log(`Server is closing due to uncaught exception error`);
     process.exit(1);
 });
-console.log('STRIPE_SECRET_KEY:', process.env.STRIPE_SECRET_KEY);
 
 
 

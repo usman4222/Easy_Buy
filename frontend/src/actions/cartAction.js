@@ -9,17 +9,14 @@ let apiurl = "https://easy-buy-s9rh.vercel.app"
 export const addItemsToCart = (id, quantity) => async (dispatch, getState) => {
 
     const { data } = await axios.get(`${apiurl}/api/product/product-detail/${id}`)
-    dispatch({
-        type: ADD_TO_CART,
-        payload: {
-            productId: data.product._id,
-            name: data.product.name,
-            price: data.product.price,
-            stock: data.product.stock,
-            image: data.product.image,
-            quantity
-        }
-    })
+    dispatch(ADD_TO_CART({
+        productId: data.product._id,
+        name: data.product.name,
+        price: data.product.price,
+        stock: data.product.stock,
+        image: data.product.image,
+        quantity
+    }));
 
     localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems))
 }
@@ -28,10 +25,7 @@ export const addItemsToCart = (id, quantity) => async (dispatch, getState) => {
 
 //remove from cart
 export const removeFromCart = (id) => async (dispatch, getState) => {
-    dispatch({
-        type: REMOVE_CART_ITEM,
-        payload: id
-    })
+    dispatch(REMOVE_CART_ITEM(id))
     localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems))
 }
 
@@ -39,10 +33,7 @@ export const removeFromCart = (id) => async (dispatch, getState) => {
 //save shipping info
 export const saveShippingInfo = (data) => async (dispatch) => {
 
-    dispatch({
-        type: SAVE_SHIPPING_INFO,
-        payload: data
-    })
+    dispatch(SAVE_SHIPPING_INFO(data))
 
     localStorage.setItem("shippingInfo", JSON.stringify(data))
 }

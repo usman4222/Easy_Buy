@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { clearErrors, logout, updateProfile } from "../../actions/UserAction";
 import { UPDATE_PROFILE_RESET } from "../../redux/userSlice/userProfileSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MetaData from "../MetaData";
 
 const UserProfile = () => {
@@ -13,6 +13,7 @@ const UserProfile = () => {
     isUpdated,
   } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const [isEditing, setIsEditing] = useState(false);
   const [updatedUser, setUpdatedUser] = useState({

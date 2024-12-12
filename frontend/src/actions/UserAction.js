@@ -14,10 +14,10 @@ import {
   USER_DETAIL_REQUEST,
   USER_DETAIL_SUCCESS,
   USER_DETAIL_FAIL,
-  CLEAR_ERRORS,
 } from "../constants/UserConstant";
 import axios from "axios";
 import {
+  CLEAR_ERRORS,
   LOGIN_FAIL,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -62,7 +62,7 @@ export const login = (userData) => async (dispatch) => {
       config
     );
 
-    console.log("data", data);
+    console.log("data", data); 
 
     dispatch(LOGIN_SUCCESS(data.user));
   } catch (error) {

@@ -14,7 +14,6 @@ const NewArrival = () => {
   const { products, resultPerPage, filteredProductsCount, loading } =
     useSelector((state) => state.allProducts);
 
-  // Fetch products when filters or page change
   useEffect(() => {
     const category =
       selectedCategory === "All" ? "" : selectedCategory.toLowerCase();
@@ -27,7 +26,6 @@ const NewArrival = () => {
     setFavorites(storedFavorites);
   }, []);
 
-  // Add or remove product from favorites
   const toggleFavorite = (productId) => {
     const updatedFavorites = favorites.includes(productId)
       ? favorites.filter((id) => id !== productId)
@@ -52,9 +50,9 @@ const NewArrival = () => {
   const discountedPrice = (price, discount) => {
     if (discount) {
       const discountAmount = (price * discount) / 100;
-      return (price - discountAmount).toFixed(2); // Return discounted price with two decimals
+      return (price - discountAmount).toFixed(2)
     }
-    return price; // Return original price if no discount
+    return price
   };
   
 
@@ -71,7 +69,7 @@ const NewArrival = () => {
             key={category}
             onClick={() => {
               setSelectedCategory(category);
-              setCurrentPage(1); // Reset to first page
+              setCurrentPage(1);
             }}
             className={`px-4 py-2 rounded-full border ${
               selectedCategory === category
@@ -95,7 +93,6 @@ const NewArrival = () => {
           </div>
         </div>
       ) : (
-        // Product Grid
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2 md:px-10 lg:px-20">
           {products &&
             products.map((product) => (
@@ -111,7 +108,7 @@ const NewArrival = () => {
                         : "text-gray-500"
                     } hover:text-primaryRed transition-colors duration-200`}
                     onClick={(e) => {
-                      e.preventDefault(); // Prevent link navigation
+                      e.preventDefault(); 
                       toggleFavorite(product._id);
                     }}
                   >

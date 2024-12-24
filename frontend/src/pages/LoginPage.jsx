@@ -25,19 +25,19 @@ const LoginPage = () => {
             return;
         }    
         dispatch(login({ email: loginEmail, password: loginPassword }));
-        navigate("/");
     };
 
     useEffect(() => {
-        if (error) {
-            console.log("This is the error:", error);
-            toast.error(error.message || error);
-        }
-        if (currentUser) {
-            toast.success('Login successful!');
-            navigate("/");
-        }
-    }, [error, currentUser, dispatch]);
+      if (error) {
+          toast.error(error.message || error);
+          dispatch(clearErrors());
+      }
+      if (currentUser) {
+          toast.success('Login successful!');
+          navigate("/");
+      }
+  }, [error, currentUser, dispatch]);
+  
 
 
 
@@ -90,7 +90,7 @@ const LoginPage = () => {
                             <button
                                 type="submit"
                                 className="bg-primaryRed rounded-xl text-white py-2 hover:scale-105 duration-300"
-                                disabled={loading} 
+                                // disabled={loading} 
                             >
                                 {loading ? 'Logging in...' : 'Login'}
                             </button>

@@ -31,7 +31,7 @@ const ProcessPaymentPage = () => {
     const verifyPayment = async () => {
       try {
         const response = await fetch(
-          `https://easy-buy-s9rh.vercel.app/api/stripe/verify-session/${sessionId}`,
+          `http://localhost:4000/api/stripe/verify-session/${sessionId}`,
           {
             method: "GET",
             credentials: "include",
@@ -43,7 +43,6 @@ const ProcessPaymentPage = () => {
           const session = JSON.parse(text);
 
           if (session.payment_status === "paid" && !isOrderCreated) {
-            // dispatch(SET_PAYMENT_STATUS("paid"));
             setSessionDetails(session);
             setPaymentVerified(true);
 
@@ -82,7 +81,6 @@ const ProcessPaymentPage = () => {
     verifyPayment();
   }, [navigate, shippingInfo, cartItems, dispatch, isOrderCreated]);
 
-  // If payment is still being processed
   return (
     <div>
       <MetaData title="Payment Processing" />

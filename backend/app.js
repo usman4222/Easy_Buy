@@ -1,4 +1,3 @@
-// app.js
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -6,11 +5,11 @@ import userRoutes from "./routes/userRoute.js";
 import productRoutes from "./routes/productRoute.js";
 import paymentRoutes from "./routes/paymentRoute.js";
 import cookieParser from "cookie-parser";
-import errorMiddleware from "./middleware/error.js";
 import bodyParser from "body-parser";
 import orderRoutes from "./routes/orderRoute.js";
-import ErrorHandler from "./utils/errorHandler.js";
 import Stripe from "stripe";
+import { ErrorHandler } from "./middleware/error.js";
+import  errorMiddleware  from "./utils/errorHandler.js";
 
 const app = express();
 
@@ -65,7 +64,6 @@ app.get("/api/stripe/verify-session/:sessionId", async (req, res) => {
       return res.status(400).json({ error: "Session not found" });
     }
 
-    console.log("session", session);
 
     res.status(200).json(session);
   } catch (error) {

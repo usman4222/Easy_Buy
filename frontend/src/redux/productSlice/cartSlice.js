@@ -13,16 +13,13 @@ const cartSlice = createSlice({
         ADD_TO_CART: (state, action) => {
             const newItem = action.payload;
 
-            // Find the index of the existing item in the cart
             const index = state.cartItems.findIndex(
-                (item) => item.productId === newItem.productId // Match by productId
+                (item) => item.productId === newItem.productId
             );
 
             if (index !== -1) {
-                // If the item already exists, update the quantity
                 state.cartItems[index].quantity += newItem.quantity;
             } else {
-                // If the item doesn't exist, add the new item to the cart
                 state.cartItems.push(newItem);
             }
         },

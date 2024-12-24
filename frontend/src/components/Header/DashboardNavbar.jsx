@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom";
-// import settings from "../assets/svg/settings.svg";
-// import notification from "../assets/svg/notification.svg";
 import { SiSimilarweb } from "react-icons/si";
 
 

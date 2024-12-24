@@ -83,6 +83,7 @@ const AddProduct = () => {
       setImageURL(data.secure_url);
       dispatch(createProduct(myForm));
       toast.success("Product created successfully!");
+      navigate("/all-products");
     } catch (error) {
       toast.error(`Error: ${error.message}`);
     } finally {

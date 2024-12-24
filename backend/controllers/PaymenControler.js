@@ -11,11 +11,6 @@ export const createCheckOut = catchAsyncError(async (req, res, next) => {
       .json({ success: false, message: "Orders data should be an array" });
   }
 
-  console.log("Orders received:", orders);
-
-  console.log("orders price", orders.price);
-  console.log("orders price", orders.quantity);
-
   const lineItems = orders.map((item) => ({
     price_data: {
       currency: "usd",
@@ -30,10 +25,6 @@ export const createCheckOut = catchAsyncError(async (req, res, next) => {
   }));
 
   const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
-  // console.log("Stripe API key", process.env.STRIPE_SECRET_KEY);
-  
-  // console.log("lineItems", lineItems);
-  // console.log("stripe", stripe);
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -65,7 +56,6 @@ export const verifyPayment = catchAsyncError(async (req, res) => {
       return res.status(400).json({ error: "Session not found" });
     }
 
-    console.log("session", session);
 
     res.status(200).json(session);
   } catch (error) {

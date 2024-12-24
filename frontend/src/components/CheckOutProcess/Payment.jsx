@@ -33,8 +33,8 @@ const Payment = () => {
   const createCheckoutSession = async (orders) => {
     try {
       const response = await fetch(
-        "https://easy-buy-s9rh.vercel.app/api/payment/create-checkout-sessions",
-        // "http://localhost:4000/api/payment/create-checkout-sessions",
+        // "https://easy-buy-s9rh.vercel.app/api/payment/create-checkout-sessions",
+        "http://localhost:4000/api/payment/create-checkout-sessions",
         {
           method: "POST",
           headers: {
@@ -64,6 +64,10 @@ const Payment = () => {
 
   const paymentHandler = async () => {
     try {
+      if (!STRIPE_KEY) {
+        toast.error('Payment gateway is not available for Test Mode.');
+        return;
+      }
       const stripe = await loadStripe(STRIPE_KEY);
 
       const session = await createCheckoutSession({
@@ -95,7 +99,7 @@ const Payment = () => {
       navigate("/process-payment");
     } catch (error) {
       console.error("Error during paymentHandler:", error);
-      toast.error("Payment failed. Please try again later.");
+      toast.error("Payment failed. Payment gateway is not available for Test Mode.");
     }
   };
 

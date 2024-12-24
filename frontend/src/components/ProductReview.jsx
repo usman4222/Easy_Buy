@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FaRegStar, FaStar } from "react-icons/fa";
-import {
-  clearErrors,
-  getAllReviews,
-  newReview,
-} from "../actions/productsAction";
+import { clearErrors, getAllReviews, newReview } from "../actions/productsAction";
 import { useDispatch, useSelector } from "react-redux";
 import { CLEAR_ERRORS, NEW_REVIEW_RESET } from "../redux/reviewSlice/addReview";
 import { useParams } from "react-router-dom";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -19,18 +14,19 @@ const ProductReview = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { reviews, loading, error } = useSelector((state) => state.allReviews);
-  const { success, error: reviewError } = useSelector(
-    (state) => state.newReview
-  );
+  const { success, error: reviewError } = useSelector((state) => state.newReview);
   const { currentUser } = useSelector((state) => state.user);
 
   const userReview = reviews?.find(
     (review) => review.user?._id === currentUser?._id
   );
+  console.log(reviews);
+  console.log(currentUser?._id);
+  
 
   useEffect(() => {
     if (error) {
-      alert(error);
+      toast.error(error.message);
       dispatch(CLEAR_ERRORS());
     }
     if (reviewError) {
@@ -39,12 +35,14 @@ const ProductReview = () => {
     }
     if (success) {
       toast.success("Review Submitted Successfully");
-      dispatch({ type: NEW_REVIEW_RESET });
+      dispatch(NEW_REVIEW_RESET());
     }
-    if (id) {
-      dispatch(getAllReviews(id));
-    }
-  }, [dispatch, id, error, reviewError, success]);
+    // if (id) {
+    //   dispatch(getAllReviews(id));
+    // }
+
+
+  }, [dispatch, id, error, reviewError, success, userReview]);
 
   const handleRating = (rate) => setRating(rate);
 
@@ -68,6 +66,11 @@ const ProductReview = () => {
   };
 
   const submitReviewHandler = () => {
+
+    if (userReview) {
+      toast.info("You have already submitted a review for this product.");
+    }
+
     if (!comment) {
       toast.error("Please enter a comment.");
       return;
@@ -93,8 +96,6 @@ const ProductReview = () => {
 
       {loading ? (
         <p>Loading reviews...</p>
-      ) : error ? (
-        <p className="text-red-500">{error}</p>
       ) : reviews?.length === 0 ? (
         <p>No reviews available for this product.</p>
       ) : (
@@ -159,9 +160,9 @@ const ProductReview = () => {
           <button
             className="bg-primaryRed text-white py-2 px-6 hover:opacity-90 transition-opacity duration-300"
             onClick={submitReviewHandler}
-            disabled={userReview} 
+            disabled={userReview}
           >
-            {userReview ? "Update Review" : "Submit Review"}
+            {userReview ? "Review Already Added" : "Submit Review"}
           </button>
         </div>
       </div>

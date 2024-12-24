@@ -13,7 +13,6 @@ const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
-    // Set loading to true for different requests
     UPDATE_PROFILE_REQUEST: (state) => {
       state.loading = true;
     },
@@ -27,13 +26,11 @@ const profileSlice = createSlice({
       state.loading = true;
     },
 
-    // Success cases: update the state based on the payload
     UPDATE_PROFILE_SUCCESS: (state, action) => {
-      console.log("Payload received:", action.payload);
       state.loading = false;
-      state.isUpdated = true; // Indicate the update was successful
-      state.currentUser = action.payload; // Update the user profile
-    },
+      state.isUpdated = true;
+      state.currentUser = action.payload;
+    },    
     UPDATE_PASSWORD_SUCCESS: (state) => {
       state.loading = false;
     },
@@ -47,7 +44,6 @@ const profileSlice = createSlice({
       state.message = action.payload.message;
     },
 
-    // Reset cases: reset specific parts of the state
     UPDATE_PROFILE_RESET: (state) => {
       state.isUpdated = false;
     },
@@ -61,8 +57,9 @@ const profileSlice = createSlice({
       state.isDeleted = false;
     },
 
-    // Fail cases: set error and loading to false
-    UPDATE_PROFILE_FAIL: (state, action) => {
+    UPDATE_PROFILE_FAIL: (state, action) => {    
+      console.log("action.payload",action.payload);
+        
       state.loading = false;
       state.error = action.payload;
     },
@@ -79,7 +76,6 @@ const profileSlice = createSlice({
       state.error = action.payload;
     },
 
-    // Clear errors action to reset error state
     CLEAR_ERRORS: (state) => {
       state.error = null;
     },

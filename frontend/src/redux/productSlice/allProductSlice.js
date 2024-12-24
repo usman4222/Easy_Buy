@@ -19,7 +19,6 @@ const productSlice = createSlice({
             state.products = [];
         },
         ALL_PRODUCT_SUCCESS: (state, action) => {
-            console.log("Payload:", action.payload);
             state.loading = false;
             state.products = action.payload.products;
             state.productsCount = action.payload.totalProductsCount; 

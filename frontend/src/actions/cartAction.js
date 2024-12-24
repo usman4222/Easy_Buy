@@ -3,8 +3,8 @@ import { ADD_TO_CART, REMOVE_CART_ITEM, SAVE_SHIPPING_INFO } from "../redux/prod
 
 //add item on cart
 
-let apiurl = "https://easy-buy-s9rh.vercel.app"
-// let apiurl = "http://localhost:4000"
+// let apiurl = "https://easy-buy-s9rh.vercel.app"
+let apiurl = "http://localhost:4000"
 
 export const addItemsToCart = (id, quantity) => async (dispatch, getState) => {
 

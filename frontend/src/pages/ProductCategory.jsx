@@ -65,7 +65,6 @@ const ProductCategory = () => {
       setCurrentPage((prev) => prev - 1);
     }
   };
-  // Handlers for filters
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
     setCurrentPage(1);
@@ -87,7 +86,6 @@ const ProductCategory = () => {
     setFavorites(storedFavorites);
   }, []);
 
-  // Add or remove product from favorites
   const toggleFavorite = (productId) => {
     const updatedFavorites = favorites.includes(productId)
       ? favorites.filter((id) => id !== productId)
@@ -97,7 +95,6 @@ const ProductCategory = () => {
     localStorage.setItem("favoriteProducts", JSON.stringify(updatedFavorites));
   };
 
-  // Background style for range slider
   const rangeBackgroundStyle = {
     background: `linear-gradient(
       to right, 
@@ -111,9 +108,9 @@ const ProductCategory = () => {
   const discountedPrice = (price, discount) => {
     if (discount) {
       const discountAmount = (price * discount) / 100;
-      return (price - discountAmount).toFixed(2); // Return discounted price with two decimals
+      return (price - discountAmount).toFixed(2);
     }
-    return price; // Return original price if no discount
+    return price; 
   };
 
   return (
@@ -250,7 +247,7 @@ const ProductCategory = () => {
                         : "text-gray-500"
                     } hover:text-primaryRed transition-colors duration-200`}
                     onClick={(e) => {
-                      e.preventDefault(); // Prevent link navigation
+                      e.preventDefault(); 
                       toggleFavorite(product._id);
                     }}
                   >

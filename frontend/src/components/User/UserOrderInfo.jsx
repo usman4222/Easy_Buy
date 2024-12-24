@@ -18,15 +18,11 @@ const UserOrderInfo = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  console.log("single order", order);
 
   useEffect(() => {
       dispatch(getOrderDetails(id));
   }, [dispatch, id]);
 
-  // if (error) {
-  //   return <div>Error fetching order details: {error}</div>;
-  // }
   if (loading || !order) {
     return <div>Loading...</div>;
   }

@@ -25,7 +25,6 @@ const productReviewsSlice = createSlice({
     },
 });
 
-// Exporting actions
 export const {
     ALL_REVIEW_REQUEST,
     ALL_REVIEW_SUCCESS,
@@ -33,5 +32,4 @@ export const {
     CLEAR_ERRORS,
 } = productReviewsSlice.actions;
 
-// Exporting the reducer
 export default productReviewsSlice.reducer;

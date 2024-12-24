@@ -1,5 +1,4 @@
 import express from "express";
-import { authorizeRole, isAuthenticatedUser } from "../middleware/authUser.js";
 import {
   createProduct,
   createProductReview,
@@ -11,20 +10,21 @@ import {
   getProducts,
   updateProduct,
 } from "../controllers/productController.js";
+import { verifyToken } from "../middleware/authUser.js";
 
 const router = express.Router();
 
-router.post("/admin/create-product", authorizeRole("admin"), createProduct);
+router.post("/admin/create-product", verifyToken, createProduct);
 router.get("/get-product", getProducts);
-router.get("/admin/products", authorizeRole("admin"), getAdminProducts);
-router.put("/admin/update-product/:id", authorizeRole("admin"), updateProduct);
+router.get("/admin/products", verifyToken, getAdminProducts);
+router.put("/admin/update-product/:id",verifyToken,  updateProduct);
 router.delete(
   "/admin/delete-product/:id",
-  authorizeRole("admin"),
+  verifyToken,
   deleteProduct
 );
 router.get("/product-detail/:id", getProductDetails);
-router.put("/create-product-review", createProductReview);
+router.put("/create-product-review", verifyToken, createProductReview);
 router.get("/get-product-reviews/:id", getAllReviewsOfProduct);
 // .delete(deleteReview, isAuthenticatedUser)
 

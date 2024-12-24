@@ -4,7 +4,12 @@ import BackButton from "../../../components/BackButton";
 import Heading from "../../../components/Heading";
 import { useDispatch, useSelector } from "react-redux";
 import { NEW_PRODUCT_RESET } from "../../../redux/productSlice/productSlice";
-import { updateProduct, getProducts, getProductDetails } from "../../../actions/productsAction";
+import {
+  updateProduct,
+  getProducts,
+  getProductDetails,
+  clearErrors,
+} from "../../../actions/productsAction";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Spinner } from "flowbite-react";
@@ -15,7 +20,11 @@ const UpdateProduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
-  const { error: updateError, product, isUpdated } = useSelector((state) => state.productDetails);
+  const {
+    error: updateError,
+    product,
+    isUpdated,
+  } = useSelector((state) => state.productDetails);
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
@@ -29,62 +38,57 @@ const UpdateProduct = () => {
   const [file, setFile] = useState(null);
   const productId = id;
 
-  console.log("product",product);
-  
-
   useEffect(() => {
-        setName(product.name);
-        setDescription(product.description);
-        setPrice(product.price);
-        setStock(product.stock);
-        setCategory(product.category);
-        setImagePreview(product.image);
+    if (product && product._id !== productId) {
+      dispatch(getProductDetails(productId));
+    } else {
+      setName(product.name);
+      setDescription(product.description);
+      setPrice(product.price);
+      setStock(product.stock);
+      setCategory(product.category);
+    }
+
     if (updateError) {
-      // toast.error(updateError);
-      // dispatch(clearErrors());
+      dispatch(clearErrors());
     }
     if (isUpdated) {
-      toast.success("Product Updated Successfully");
-      navigate("/admin/dashboard");
       dispatch({ type: UPDATE_PRODUCT_RESET });
+      toast.success("Product Updated Successfully");
+      navigate("/all-products");
     }
-  }, [dispatch, updateError, isUpdated, navigate, productId, product]);
-
-
-
-
-
+  }, [dispatch, updateError, isUpdated, history, productId, product]);
 
   const updateProductHandler = async (e) => {
     e.preventDefault();
-  
+
     setLoading(true);
-  
+
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", "easy_buy");
     formData.append("cloud_name", "dnylalr7y");
-  
+
     try {
       // const response = await fetch("https://api.cloudinary.com/v1_1/dnylalr7y/image/upload", {
       //   method: "POST",
       //   body: formData,
       // });
-  
+
       // const data = await response.json();
-  
+
       // if (!data.secure_url) {
       //   throw new Error("Image upload failed");
       // }
-  
+
       const myForm = new FormData();
       myForm.set("name", name);
       myForm.set("price", price);
       myForm.set("stock", stock);
       myForm.set("category", category);
       myForm.set("description", description);
-      // myForm.set("image", data.secure_url); 
-  
+      // myForm.set("image", data.secure_url);
+
       // setImageURL(data.secure_url);
       dispatch(updateProduct(id, myForm));
       toast.success("Product updated successfully!");
@@ -93,17 +97,15 @@ const UpdateProduct = () => {
       toast.error(error.message || "Image upload failed");
     }
   };
-  
 
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
-  
+
     if (selectedImage) {
-      setFile(selectedImage);  // This will set the file to upload
-      setImagePreview(URL.createObjectURL(selectedImage)); // Preview the new image
+      setFile(selectedImage); 
+      setImagePreview(URL.createObjectURL(selectedImage)); 
     }
   };
-  
 
   const handleDragOver = (event) => {
     event.preventDefault();
@@ -132,14 +134,18 @@ const UpdateProduct = () => {
         <div className="flex flex-wrap justify-between items-center my-[14px]">
           <div className="flex items-center gap-[20px]">
             <BackButton path={"/all-products"} />
-            <h2 className="text-[#1E293B] font-montserrat text-2xl font-bold leading-6">Update Product</h2>
+            <h2 className="text-[#1E293B] font-montserrat text-2xl font-bold leading-6">
+              Update Product
+            </h2>
           </div>
         </div>
 
         <form onSubmit={updateProductHandler}>
           <div className="flex flex-col xl:flex-row bg-white py-[24px] rounded-lg w-full h-auto">
             <div className="px-5 w-full">
-              <h4 className="text-[#1E293B] font-montserrat text-[20px] font-semibold leading-[24px]">Product Information</h4>
+              <h4 className="text-[#1E293B] font-montserrat text-[20px] font-semibold leading-[24px]">
+                Product Information
+              </h4>
               <div className="my-[14px] flex flex-col gap-[24px] flex-wrap">
                 <div className="flex flex-col sm:flex-row justify-between gap-[24px]">
                   <div className="w-full">
@@ -226,14 +232,14 @@ const UpdateProduct = () => {
             disabled={loading}
             className="inline-flex w-full my-10 justify-center rounded-md bg-gradient-to-r from-[#1A55A5] via-[#1A55A5] to-[#003F94] p-[10px_18px] text-sm font-semibold text-white shadow-sm"
           >
-            {loading ? (
+            {/* {loading ? (
               <>
                 <Spinner size="sm" />
                 <span className="pl-3">Updating...</span>
               </>
-            ) : (
-              "Update Product"
-            )}
+            ) : ( */}
+            Update Product
+            {/* )} */}
           </button>
         </form>
       </div>

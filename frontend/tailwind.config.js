@@ -8,6 +8,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Poppins', 'sans-serif'],
+        urbanist: ['Urbanist'],
       },
       colors: {
         customGray: 'rgb(40, 40, 40)',

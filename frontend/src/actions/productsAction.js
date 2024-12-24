@@ -1,15 +1,5 @@
 import axios from "axios";
 import {
-  CLEAR_ERRORS,
-  DELETE_PRODUCT_REQUEST,
-  DELETE_PRODUCT_SUCCESS,
-  DELETE_PRODUCT_FAIL,
-  DELETE_REVIEW_REQUEST,
-  DELETE_REVIEW_SUCCESS,
-  DELETE_REVIEW_RESET,
-  DELETE_REVIEW_FAIL,
-} from "../constants/productConstants";
-import {
   NEW_PRODUCT_FAIL,
   NEW_PRODUCT_REQUEST,
   NEW_PRODUCT_SUCCESS,
@@ -18,6 +8,7 @@ import {
   ALL_PRODUCT_FAIL,
   ALL_PRODUCT_REQUEST,
   ALL_PRODUCT_SUCCESS,
+  CLEAR_ERRORS,
 } from "../redux/productSlice/allProductSlice";
 import {
   PRODUCT_DETAILS_FAIL,
@@ -44,9 +35,14 @@ import {
   ADMIN_PRODUCT_SUCCESS,
   ADMIN_PRODUCT_FAIL,
 } from "../redux/productSlice/GetAllAdminProduct";
+import {
+  DELETE_PRODUCT_REQUEST,
+  DELETE_PRODUCT_SUCCESS,
+  DELETE_PRODUCT_FAIL,
+} from "../redux/productSlice/deleteProductSlice";
 
-let apiurl = "https://easy-buy-s9rh.vercel.app"
-// let apiurl = "http://localhost:4000";
+// let apiurl = "https://easy-buy-s9rh.vercel.app"
+let apiurl = "http://localhost:4000";
 
 export const getProducts =
   (
@@ -76,15 +72,14 @@ export const getProducts =
 
       const { data } = await axios.get(apiEndpoint);
 
-      console.log("data", data);
 
       dispatch(ALL_PRODUCT_SUCCESS(data));
     } catch (error) {
-      console.log(error);
-      dispatch(ALL_PRODUCT_FAIL( error.response?.data?.message || "Failed to fetch products"));
+      dispatch(ALL_PRODUCT_FAIL(error.response?.data?.message));
     }
   };
 
+  
 //get products by admin
 export const getAminProducts = () => async (dispatch) => {
   try {
@@ -106,6 +101,8 @@ export const getAminProducts = () => async (dispatch) => {
   }
 };
 
+
+
 export const createProduct = (productData) => async (dispatch) => {
   try {
     dispatch(NEW_PRODUCT_REQUEST());
@@ -121,7 +118,6 @@ export const createProduct = (productData) => async (dispatch) => {
     );
 
     dispatch(NEW_PRODUCT_SUCCESS(data));
-    console.log("Product created successfully", data.product);
 
     return data.product;
   } catch (error) {
@@ -131,6 +127,8 @@ export const createProduct = (productData) => async (dispatch) => {
     throw error;
   }
 };
+
+
 
 export const updateProduct = (id, productData) => async (dispatch) => {
   try {
@@ -147,7 +145,6 @@ export const updateProduct = (id, productData) => async (dispatch) => {
     );
 
     dispatch(UPDATE_PRODUCT_SUCCESS(data.success));
-    console.log("Product Updated successfully", data.product);
 
     return data.product;
   } catch (error) {
@@ -158,21 +155,28 @@ export const updateProduct = (id, productData) => async (dispatch) => {
   }
 };
 
+
+
 export const getProductDetails = (id) => async (dispatch) => {
   try {
     dispatch(PRODUCT_DETAILS_REQUEST());
 
-    // Correct API call
     const { data } = await axios.get(
       `${apiurl}/api/product/product-detail/${id}`
     );
 
     dispatch(PRODUCT_DETAILS_SUCCESS(data.product));
   } catch (error) {
-    dispatch(PRODUCT_DETAILS_FAIL(error.response?.data?.message || "Something went wrong"));
+    dispatch(
+      PRODUCT_DETAILS_FAIL(
+        error.response?.data?.message
+      )
+    );
     console.error("Error fetching product details:", error);
   }
 };
+
+
 
 export const delProduct = (id) => async (dispatch) => {
   try {
@@ -197,6 +201,8 @@ export const delProduct = (id) => async (dispatch) => {
   }
 };
 
+
+
 export const newReview = (reviewData) => async (dispatch) => {
   try {
     dispatch(NEW_REVIEW_REQUEST());
@@ -217,6 +223,8 @@ export const newReview = (reviewData) => async (dispatch) => {
   }
 };
 
+
+
 export const getAllReviews = (id) => async (dispatch) => {
   try {
     dispatch(ALL_REVIEW_REQUEST());
@@ -227,23 +235,23 @@ export const getAllReviews = (id) => async (dispatch) => {
 
     dispatch(ALL_REVIEW_SUCCESS(data.reviews));
   } catch (error) {
-    dispatch(ALL_REVIEW_FAIL(error.response?.data?.message || "Failed to fetch reviews"));
+    dispatch(ALL_REVIEW_FAIL(error.response?.data?.message));
   }
 };
 
-export const deleteReview = (reviewId, productId) => async (dispatch) => {
-  try {
-    dispatch(DELETE_REVIEW_REQUEST());
+// export const deleteReview = (reviewId, productId) => async (dispatch) => {
+//   try {
+//     dispatch(DELETE_REVIEW_REQUEST());
 
-    const { data } = await axios.delete(
-      `${apiurl}/api/v1/reviews?id=${reviewId}&productId=${productId}`
-    );
+//     const { data } = await axios.delete(
+//       `${apiurl}/api/v1/reviews?id=${reviewId}&productId=${productId}`
+//     );
 
-    dispatch(DELETE_REVIEW_SUCCESS(data.success));
-  } catch (error) {
-    dispatch(DELETE_REVIEW_FAIL(error.response.data.message));
-  }
-};
+//     dispatch(DELETE_REVIEW_SUCCESS(data.success));
+//   } catch (error) {
+//     dispatch(DELETE_REVIEW_FAIL(error.response.data.message));
+//   }
+// };
 
 export const clearErrors = () => async (dispatch) => {
   dispatch(CLEAR_ERRORS());

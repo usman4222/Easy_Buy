@@ -4,29 +4,29 @@ import {
   getAllReviews,
   getProductDetails,
 } from "../../../actions/productsAction";
-import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa"; // Import star icons
+import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa"; 
 import Layout from "../../../components/Layout";
 import Heading from "../../../components/Heading";
 
 const GetReviews = () => {
-  const [productId, setProductId] = useState(""); // State for product ID input
+  const [productId, setProductId] = useState(""); 
   const dispatch = useDispatch();
 
   const {
     reviews,
     loading: reviewsLoading,
     error: reviewsError,
-  } = useSelector((state) => state.allReviews); // Select reviews from Redux store
+  } = useSelector((state) => state.allReviews); 
   const {
     product,
     loading: productLoading,
     error: productError,
-  } = useSelector((state) => state.productDetails); // Select product details from Redux store
+  } = useSelector((state) => state.productDetails); 
 
   const handleFetchReviews = () => {
     if (productId) {
-      dispatch(getAllReviews(productId)); // Fetch reviews
-      dispatch(getProductDetails(productId)); // Fetch product details
+      dispatch(getAllReviews(productId)); 
+      dispatch(getProductDetails(productId)); 
     }
   };
 

@@ -1,9 +1,4 @@
 import React from "react";
-// import usersImage from "../assets/svg/users.svg";
-// import plus from "../assets/svg/plus.svg";
-// import edit from "../assets/svg/edit.svg";
-// import del from "../assets/svg/Trash.svg";
-// import search from "../assets/svg/search.svg";
 
 const TodoList = () => {
   return (

@@ -20,8 +20,6 @@ const UserOrdersTable = () => {
 
   const { loading } = useSelector((state) => state.userProfile);
 
-  console.log(orders);
-
   useEffect(() => {
     if (error) {
       toast.error(error);

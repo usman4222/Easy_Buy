@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-// import Breadcrumb from "../components/Breadcrumb";
 import { MdLocalShipping } from "react-icons/md";
 import { FaStar, FaRegStar, FaStarHalfAlt, FaPlus } from "react-icons/fa";
 import { TiMinus } from "react-icons/ti";
-import { AiOutlineHeart } from "react-icons/ai";
 import ProductAdditionalInfo from "../components/ProductAdditionalInfo";
-import { getProductDetails } from "../actions/productsAction";
+import { getAllReviews, getProductDetails } from "../actions/productsAction";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { addItemsToCart } from "../actions/cartAction";
 import ProductReview from "../components/ProductReview";
 import MetaData from "../components/MetaData";
-import { SET_PAYMENT_STATUS } from "../redux/productSlice/cartSlice";
 
 const ProductDetailsPage = () => {
   const { id } = useParams();
@@ -21,7 +18,6 @@ const ProductDetailsPage = () => {
   const { loading, product, error } = useSelector(
     (state) => state.productDetails
   );
-  const breadcrumbItems = ["Home", "Men's", "Single Product"];
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState("");
   const [activeSection, setActiveSection] = useState("additionalInfo");
@@ -29,14 +25,16 @@ const ProductDetailsPage = () => {
   useEffect(() => {
     if (id) {
       dispatch(getProductDetails(id));
+      dispatch(getAllReviews(id));
     }
   }, [dispatch, id]);
 
-  useEffect(() => {
-    if (product && product.images && product.images.length > 0) {
-      setSelectedImage(product.images[0]);
-    }
-  }, [product]);
+
+  // useEffect(() => {
+  //   if (product && product.images && product.images.length > 0) {
+  //     setSelectedImage(product.images[0]);
+  //   }
+  // }, [product]);
 
   const handleIncrease = () => {
     if (quantity < product.stock) {
@@ -54,16 +52,15 @@ const ProductDetailsPage = () => {
 
   const addToCartHandler = () => {
     dispatch(addItemsToCart(id, quantity));
-    // dispatch(SET_PAYMENT_STATUS(null))
     toast.success("Item Added to Cart");
   };
 
   const discountedPrice = (price, discount) => {
     if (discount) {
       const discountAmount = (price * discount) / 100;
-      return (price - discountAmount).toFixed(2); // Return discounted price with two decimals
+      return (price - discountAmount).toFixed(2);
     }
-    return price; // Return original price if no discount
+    return price; 
   };
 
   if (loading) {
@@ -74,7 +71,6 @@ const ProductDetailsPage = () => {
     <div>
       <ToastContainer />
       <MetaData title={`${product.name}'s Detail`} />
-      {/* <Breadcrumb items={breadcrumbItems} /> */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10 px-5 md:px-10 lg:px-20 py-10 border-b mb-10">
         <div className="flex gap-5">
           {/* <div className="hidden md:block">
@@ -95,7 +91,7 @@ const ProductDetailsPage = () => {
           />
         </div>
 
-        <div>
+        <div className="mt-20">
           <h2 className="text-[24px] md:text-[36px] leading-tight font-medium text-customGray">
             {product.name}
           </h2>

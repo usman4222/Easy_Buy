@@ -18,7 +18,7 @@ const ShippingDetails = () => {
 
   const [address, setAddress] = useState(shippingInfo.address);
   const [country, setCountry] = useState(shippingInfo.country);
-  const [state, setState] = useState(shippingInfo.state);
+  const [province, setProvince] = useState(shippingInfo.province);
   const [pinCode, setPinCode] = useState(shippingInfo.pinCode);
   const [city, setCity] = useState(shippingInfo.city);
   const [phone, setPhone] = useState(shippingInfo.phone);
@@ -36,7 +36,7 @@ const ShippingDetails = () => {
       return;
     }
     dispatch(
-      saveShippingInfo({ address, city, country, pinCode, phone, state })
+      saveShippingInfo({ address, city, country, pinCode, phone, province })
     );
     navigate("/order/confirm");
   };
@@ -99,28 +99,26 @@ const ShippingDetails = () => {
                 <PublicIcon />
                 <input
                   type="text"
-                  placeholder="Country"
+                  placeholder="Province"
                   required
-                  value={country}
-                  onChange={(e) => setCountry(e.target.value)}
+                  value={province}
+                  onChange={(e) => setProvince(e.target.value)}
                 />
               </div>
               <div>
                 <PublicIcon />
                 <input
                   type="text"
-                  placeholder="State"
+                  placeholder="Country"
                   required
-                  value={state}
-                  onChange={(e) => setState(e.target.value)}
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
                 />
               </div>
-
               <input
                 type="submit"
                 value="Continue"
                 className="bg-[#FE4C50] px-20 py-2 hover:bg-[#FE4C50]/90 cursor-pointer text-white mt-10"
-                disabled={state ? false : true}
               />
             </form>
           </div>

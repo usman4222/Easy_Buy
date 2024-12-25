@@ -100,23 +100,28 @@ export const signOut = async (req, res, next) => {
 
 export const getUserDetails = async (req, res, next) => {
   try {
-    const user = await User.findById(req.user.userId);
+    console.log("req.user", req.user);
 
+    const user = await User.findById({ _id: req.user.userId }); 
+
+    console.log("user",user);
+    
     if (!user) {
       return next(ErrorHandler(404, "User not found"));
     }
 
-    const { password, ...rest } = user.toObject(); 
+    // const { password, ...rest } = user.toObject();
 
     res.status(200).json({
       success: true,
-      user: rest,  
+      user: user,
     });
-    
+
   } catch (error) {
-    next(error); 
+    next(error);
   }
 };
+
 
 
 

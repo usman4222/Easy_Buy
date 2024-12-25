@@ -41,8 +41,8 @@ import {
   DELETE_PRODUCT_FAIL,
 } from "../redux/productSlice/deleteProductSlice";
 
-// let apiurl = "https://easy-buy-s9rh.vercel.app"
-let apiurl = "http://localhost:4000";
+let apiurl = "https://easy-buy-s9rh.vercel.app"
+// let apiurl = "http://localhost:4000";
 
 export const getProducts =
   (

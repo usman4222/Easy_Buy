@@ -23,8 +23,8 @@ import {
 import { MY_ORDER_FAIL, MY_ORDER_REQUEST, MY_ORDER_SUCCESS } from "../redux/orderSlice/myOrders";
 import { DELETE_ORDER_FAIL, DELETE_ORDER_REQUEST, DELETE_ORDER_SUCCESS } from "../redux/orderSlice/deleteOrder";
 
-// let apiurl = "https://easy-buy-s9rh.vercel.app"
-let apiurl = "http://localhost:4000"
+let apiurl = "https://easy-buy-s9rh.vercel.app"
+// let apiurl = "http://localhost:4000"
 
 
 export const createOrder = (order) => async (dispatch) => {

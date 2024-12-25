@@ -56,7 +56,7 @@ const App = () => {
   return (
     <>
       {!shouldHideLayout && <Navbar />}
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div className="text-center">Loading...</div>}>
         <Routes>
           {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>

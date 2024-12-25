@@ -81,7 +81,7 @@ export const register = (userData) => async (dispatch) => {
   }
 };
 
-export const myProfile = (userId) => async (dispatch) => {
+export const myProfile = () => async (dispatch) => {
   try {
     dispatch(LOAD_REQUEST());
 
@@ -92,13 +92,10 @@ export const myProfile = (userId) => async (dispatch) => {
       withCredentials: true,
     };
 
-    const { data } = await axios.get(`${apiurl}/api/user/me/${userId}`, config);
-    
+    const { data } = await axios.get(`${apiurl}/api/user/me`, config);
 
     dispatch(LOAD_SUCCESS(data));
   } catch (error) {
-    console.log(error);
-    
     dispatch(
       LOAD_FAIL(error.response?.data?.message || "Something went wrong")
     );

@@ -100,7 +100,7 @@ export const signOut = async (req, res, next) => {
 
 export const getUserDetails = async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.userId);
+    const user = await User.findById(req.user.userId);
     if (!user) {
       return next(ErrorHandler(404, "User not found"));
     }

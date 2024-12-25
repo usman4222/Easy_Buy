@@ -5,20 +5,16 @@ import { Link, useNavigate } from "react-router-dom";
 import MetaData from "../MetaData";
 
 const UserProfile = () => {
-const { currentUser: profileUser } = useSelector((state) => state.myProfileInfo);
-const { currentUser: loggedInUser = {} } = useSelector((state) => state.user); 
+  const { currentUser: profileUser } = useSelector(
+    (state) => state.myProfileInfo
+  );
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const userId = loggedInUser?._id;
-
-
   useEffect(() => {
-    if (userId) {
-      dispatch(myProfile(userId));
-    }
-  }, [dispatch, userId]);
+    dispatch(myProfile());
+  }, [dispatch]);
 
   const handleLogout = async () => {
     try {

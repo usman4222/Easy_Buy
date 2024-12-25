@@ -55,7 +55,9 @@ export const myOrders = () => async (dispatch) => {
     dispatch(MY_ORDER_REQUEST());
 
     const config = {
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       withCredentials: true,
     };
 
@@ -63,7 +65,7 @@ export const myOrders = () => async (dispatch) => {
       `${apiurl}/api/order/my-orders`,
       config
     );
-
+    
     dispatch(MY_ORDER_SUCCESS(data.orders));
   } catch (error) {
     dispatch(MY_ORDER_FAIL(error.response.data.message));

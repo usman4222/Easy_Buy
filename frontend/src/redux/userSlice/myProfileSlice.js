@@ -15,7 +15,7 @@ const myProfileSlice = createSlice({
       state.loading = true;
       state.isAuthenticated = false;
     },
-    LOAD_SUCCESS: (state, action) => {
+    LOAD_SUCCESS: (state, action) => { 
       state.loading = false;
       state.isAuthenticated = true;
       state.currentUser = action.payload;

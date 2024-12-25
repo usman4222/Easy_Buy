@@ -33,8 +33,8 @@ const Payment = () => {
   const createCheckoutSession = async (orders) => {
     try {
       const response = await fetch(
-        // "https://easy-buy-s9rh.vercel.app/api/payment/create-checkout-sessions",
-        "http://localhost:4000/api/payment/create-checkout-sessions",
+        "https://easy-buy-s9rh.vercel.app/api/payment/create-checkout-sessions",
+        // "http://localhost:4000/api/payment/create-checkout-sessions",
         {
           method: "POST",
           headers: {

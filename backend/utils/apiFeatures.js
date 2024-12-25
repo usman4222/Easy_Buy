@@ -14,7 +14,6 @@ class ApiFeatures {
             }
             : {};
 
-        console.log(keyword);
         this.query = this.query.find({ ...keyword });
         return this;
     }
@@ -22,26 +21,27 @@ class ApiFeatures {
     filter() {
         const queryCopy = { ...this.queryStr };
         const removeFields = ["keyword", "page", "limit", "minPrice", "maxPrice"];
-
-        removeFields.forEach(key => delete queryCopy[key]);
-
+    
+        removeFields.forEach((key) => delete queryCopy[key]);
+    
         if (this.queryStr.minPrice || this.queryStr.maxPrice) {
             const priceFilter = {};
-
+    
             if (this.queryStr.minPrice) {
-                priceFilter.$gte = this.queryStr.minPrice; 
+                priceFilter.$gte = Number(this.queryStr.minPrice); 
             }
-
+    
             if (this.queryStr.maxPrice) {
-                priceFilter.$lte = this.queryStr.maxPrice; 
+                priceFilter.$lte = Number(this.queryStr.maxPrice);
             }
-
-            queryCopy.price = priceFilter;
+    
+            queryCopy.price = priceFilter; 
         }
 
         this.query = this.query.find(queryCopy);
         return this;
     }
+    
 
 
     pagination(resultPerPage) {

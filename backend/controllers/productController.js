@@ -60,9 +60,8 @@ export const createProduct = catchAsyncError(async (req, res, next) => {
 export const getProducts = async (req, res, next) => {
   try {
     const resultPerPage = 10;
-
-    const minPrice = req.query.minPrice || null;
-    const maxPrice = req.query.maxPrice || null;
+    const minPrice = req.query.minPrice || 0;  
+    const maxPrice = req.query.maxPrice || Infinity;  
 
     const apiFeaturesForCount = new ApiFeatures(Product.find(), req.query)
       .search()
@@ -90,6 +89,7 @@ export const getProducts = async (req, res, next) => {
     next(error);
   }
 };
+
 
 export const getAdminProducts = async (req, res, next) => {
   try {
@@ -209,12 +209,12 @@ export const createProductReview = catchAsyncError(async (req, res, next) => {
   }
 
   const isReviewed = product.reviews.find(
-    (rev) => rev.user && rev.user.toString() === req.user._id.toString()
+    (rev) => rev.user && rev.user.toString() === req.user.userId.toString()
   );
 
   if (isReviewed) {
     product.reviews.forEach((rev) => {
-      if (rev.user && rev.user.toString() === req.user._id.toString()) {
+      if (rev.user && rev.user.toString() === req.user.userId.toString()) {
         rev.rating = rating;
         rev.comment = comment;
       }

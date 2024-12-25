@@ -20,9 +20,6 @@ const ProductReview = () => {
   const userReview = reviews?.find(
     (review) => review.user?._id === currentUser?._id
   );
-  console.log(reviews);
-  console.log(currentUser?._id);
-  
 
   useEffect(() => {
     if (error) {
@@ -36,12 +33,8 @@ const ProductReview = () => {
     if (success) {
       toast.success("Review Submitted Successfully");
       dispatch(NEW_REVIEW_RESET());
+      dispatch(getAllReviews(id));
     }
-    // if (id) {
-    //   dispatch(getAllReviews(id));
-    // }
-
-
   }, [dispatch, id, error, reviewError, success, userReview]);
 
   const handleRating = (rate) => setRating(rate);

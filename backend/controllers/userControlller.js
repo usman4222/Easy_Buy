@@ -120,12 +120,12 @@ export const updateUserDetails = async (req, res, next) => {
     return next(ErrorHandler(400, "Invalid User ID"));
   }
 
-  if (req.body.password) {
-    if (req.body.password.length < 6) {
-      return next(ErrorHandler(400, "Password must be more than 6 characters"));
-    }
-    req.body.password = bcryptjs.hashSync(req.body.password, 10);
-  }
+  // if (req.body.password) {
+  //   if (req.body.password.length < 6) {
+  //     return next(ErrorHandler(400, "Password must be more than 6 characters"));
+  //   }
+  //   req.body.password = bcryptjs.hashSync(req.body.password, 10);
+  // }
 
   if (req.body.username) {
     if (req.body.username.length < 7 || req.body.username.length > 20) {
@@ -154,7 +154,7 @@ export const updateUserDetails = async (req, res, next) => {
           username: req.body.username,
           email: req.body.email,
           profileImage: req.body.profileImage,
-          password: req.body.password,
+          // password: req.body.password,
         },
       },
       { new: true }

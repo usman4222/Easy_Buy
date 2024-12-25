@@ -15,9 +15,20 @@ export const newOrder = catchAsyncError(async (req, res, next) => {
     totalPrice,
   } = req.body;
 
+  // Log request user
+  console.log("Request User:", req.user);
+
+  if (!req.user || !req.user.userId) {
+    return res.status(400).json({
+      success: false,
+      message: "User information is missing from the request",
+    });
+  }
+
   const existingOrder = await Order.findOne({
     "paymentInfo.id": paymentInfo.id,
   });
+
   if (existingOrder) {
     return res.status(200).json({
       success: true,
@@ -26,13 +37,11 @@ export const newOrder = catchAsyncError(async (req, res, next) => {
     });
   }
 
-  // Format order items
   const formattedOrderItems = orderItems.map((item) => ({
     ...item,
     product: new mongoose.Types.ObjectId(item.product),
   }));
 
-  // Create a new order
   const order = await Order.create({
     shippingInfo,
     orderItems: formattedOrderItems,
@@ -42,7 +51,7 @@ export const newOrder = catchAsyncError(async (req, res, next) => {
     shippingPrice,
     totalPrice,
     paidAt: Date.now(),
-    user: req.user._id,
+    user: req.user.userId,
   });
 
   res.status(201).json({
@@ -50,6 +59,7 @@ export const newOrder = catchAsyncError(async (req, res, next) => {
     order,
   });
 });
+
 
 //get single order
 export const getSingleOrder = catchAsyncError(async (req, res, next) => {
@@ -66,8 +76,9 @@ export const getSingleOrder = catchAsyncError(async (req, res, next) => {
 });
 
 //get orders who logged
-export const myOrders = catchAsyncError(async (req, res, next) => {
+export const myOrders = catchAsyncError(async (req, res, next) => { 
 
+  console.log("req.user",req.user);
   
 
   if (!req.user) {

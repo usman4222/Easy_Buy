@@ -28,7 +28,6 @@ const OrderInfo = () => {
   const [status, setStatus] = useState("");
   const navigate = useNavigate()
 
-  console.log("admin order", order);
 
   const { id } = useParams();
 

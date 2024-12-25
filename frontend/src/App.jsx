@@ -33,7 +33,6 @@ const ProcessPaymentPage = lazy(() => import("./pages/ProcessPaymentPage"));
 const Dashboard = lazy(() => import("./pages/Admin/Dashboard/index"));
 const UpdateUser = lazy(() => import("./components/User/UpdateUser"));
 const ProtectedRoute = lazy(() => import("./components/ProtectedRoute"));
-const SigninPage = lazy(() => import("./pages/client/SigninPage"));
 
 const App = () => {
   const location = useLocation();
@@ -70,7 +69,6 @@ const App = () => {
             <Route path="/my-orders" element={<UserOrdersTable />} />
             <Route path="/edit-profile" element={<UpdateUser />} />
             <Route path="/my-order-info/:id" element={<UserOrderInfo />} />
-            {/* <Route path="/signin" element={<SigninPage />} /> */}
           </Route>
 
           <Route path="/success" element={<SuccessPage />} />

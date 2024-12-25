@@ -18,6 +18,7 @@ const ProductDetailsPage = () => {
   const { loading, product, error } = useSelector(
     (state) => state.productDetails
   );
+  const { reviews } = useSelector((state) => state.allReviews);
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState("");
   const [activeSection, setActiveSection] = useState("additionalInfo");
@@ -28,7 +29,6 @@ const ProductDetailsPage = () => {
       dispatch(getAllReviews(id));
     }
   }, [dispatch, id]);
-
 
   // useEffect(() => {
   //   if (product && product.images && product.images.length > 0) {
@@ -60,7 +60,7 @@ const ProductDetailsPage = () => {
       const discountAmount = (price * discount) / 100;
       return (price - discountAmount).toFixed(2);
     }
-    return price; 
+    return price;
   };
 
   if (loading) {
@@ -180,7 +180,7 @@ const ProductDetailsPage = () => {
               activeSection === "reviews" ? "underline text-primaryRed" : ""
             }`}
           >
-            Reviews({product.reviews?.length || 0})
+            Reviews({reviews?.length || 0})
           </button>
         </div>
       </div>

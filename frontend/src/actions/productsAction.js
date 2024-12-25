@@ -50,32 +50,33 @@ export const getProducts =
     currentPage = 1,
     price = [0, 3000000],
     category = "",
-    ratings = 0
   ) =>
   async (dispatch) => {
     try {
       dispatch(ALL_PRODUCT_REQUEST());
 
-      const queryParams = new URLSearchParams({
-        keyword,
-        page: currentPage,
-        minPrice: price[0].toString(),
-        maxPrice: price[1].toString(),
-        ratings: ratings.toString(),
-      });
+      const queryParams = new URLSearchParams();
+      
+      if (keyword) queryParams.append("keyword", encodeURIComponent(keyword));
+      queryParams.append("page", currentPage);
+      queryParams.append("minPrice", price[0].toString());
+      queryParams.append("maxPrice", price[1].toString());
 
       if (category) {
-        queryParams.append("category", category);
+        queryParams.append("category", encodeURIComponent(category));
       }
 
-      const apiEndpoint = `${apiurl}/api/product/get-product?${queryParams}`;
+      const queryString = queryParams.toString();
+
+      const apiEndpoint = `${apiurl}/api/product/get-product?${queryString}`;
 
       const { data } = await axios.get(apiEndpoint);
-
-
+      
       dispatch(ALL_PRODUCT_SUCCESS(data));
     } catch (error) {
-      dispatch(ALL_PRODUCT_FAIL(error.response?.data?.message));
+      const errorMessage =
+        error.response?.data?.message || "Something went wrong!";
+      dispatch(ALL_PRODUCT_FAIL(errorMessage));
     }
   };
 
@@ -232,7 +233,7 @@ export const getAllReviews = (id) => async (dispatch) => {
     const { data } = await axios.get(
       `${apiurl}/api/product/get-product-reviews/${id}`
     );
-
+    
     dispatch(ALL_REVIEW_SUCCESS(data.reviews));
   } catch (error) {
     dispatch(ALL_REVIEW_FAIL(error.response?.data?.message));

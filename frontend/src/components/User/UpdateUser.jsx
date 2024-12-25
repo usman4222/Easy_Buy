@@ -17,20 +17,23 @@ const UpdateUser = () => {
     (state) => state.userProfile
   );
 
-  console.log("error",error);
-  
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [updatedUser, setUpdatedUser] = useState({
     username: "",
     email: "",
-    password: "",
     profileImage: "",
   });
 
   const userId = currentUser?._id;
+
+  // Clear errors when the component mounts
+  useEffect(() => {
+    if (error) {
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error]);
 
   useEffect(() => {
     if (userId) {
@@ -43,7 +46,6 @@ const UpdateUser = () => {
       setUpdatedUser({
         username: currentUser.username || "",
         email: currentUser.email || "",
-        password: "",
         profileImage: currentUser.profileImage || "",
       });
     }
@@ -68,50 +70,46 @@ const UpdateUser = () => {
     formData.append("upload_preset", "easy_buy");
     formData.append("cloud_name", "dnylalr7y");
 
-      const response = await fetch(
-        "https://api.cloudinary.com/v1_1/dnylalr7y/image/upload",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-
-      const data = await response.json();
-      if (!data.secure_url) {
-        throw new Error("Image upload failed");
+    const response = await fetch(
+      "https://api.cloudinary.com/v1_1/dnylalr7y/image/upload",
+      {
+        method: "POST",
+        body: formData,
       }
+    );
 
-      setUpdatedUser((prev) => ({
-        ...prev,
-        profileImage: data.secure_url,
-      }));
+    const data = await response.json();
+    if (!data.secure_url) {
+      toast.error("Image upload failed");
+      return;
+    }
 
-      toast.success("Image uploaded successfully!");
+    setUpdatedUser((prev) => ({
+      ...prev,
+      profileImage: data.secure_url,
+    }));
 
+    toast.success("Image uploaded successfully!");
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     dispatch(updateProfile(updatedUser, userId));
-
     if (error) {
       toast.error(error);
-      return;
-    } else {
-      toast.success("Profile Updated Successfully!");
-      navigate("/user-profile");
+      dispatch(clearErrors());
     }
   };
 
   useEffect(() => {
-    if (error) {
-      dispatch(clearErrors());
-    }
     if (isUpdated) {
+      toast.success("Profile Updated Successfully!");
       dispatch(UPDATE_PROFILE_RESET());
       dispatch(myProfile(userId));
+      navigate("/user-profile");
     }
+
   }, [error, isUpdated, dispatch, navigate, userId]);
 
   return (
@@ -144,6 +142,7 @@ const UpdateUser = () => {
                   name="username"
                   value={updatedUser.username}
                   onChange={handleEditChange}
+                  required
                   className="w-full px-4 py-2 mt-1 border rounded-md"
                 />
               </div>
@@ -157,17 +156,18 @@ const UpdateUser = () => {
                   className="w-full px-4 py-2 mt-1 border rounded-md"
                 />
               </div>
-              <div className="mb-4">
+              {/* <div className="mb-4">
                 <label className="block text-gray-600">Password</label>
                 <input
                   type="password"
                   name="password"
+                  required
                   value={updatedUser.password}
                   onChange={handleEditChange}
                   className="w-full px-4 py-2 mt-1 border rounded-md"
                   placeholder="******"
                 />
-              </div>
+              </div> */}
               <div className="mb-4">
                 <label className="block text-gray-600">Profile Image</label>
                 <input

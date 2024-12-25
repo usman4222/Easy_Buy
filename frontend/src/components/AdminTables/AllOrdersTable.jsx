@@ -17,7 +17,6 @@ const AllOrdersTable = () => {
     (state) => state.userProfile
   );
 
-  console.log(orders);
 
   useEffect(() => {
     dispatch(getAllOrders());

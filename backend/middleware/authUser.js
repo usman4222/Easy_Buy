@@ -4,6 +4,9 @@ import { ErrorHandler } from "../middleware/error.js";
 export const verifyToken = (req, res, next) => {
   const token = req.cookies.token;
 
+  console.log("token",token);
+  
+
 
   if (!token) {
     return next(ErrorHandler(401, "Token not not found!"));

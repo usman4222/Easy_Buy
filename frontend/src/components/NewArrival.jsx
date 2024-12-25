@@ -13,6 +13,7 @@ const NewArrival = () => {
 
   const { products, resultPerPage, filteredProductsCount, loading } =
     useSelector((state) => state.allProducts);
+    
 
   useEffect(() => {
     const category =
@@ -94,8 +95,7 @@ const NewArrival = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2 md:px-10 lg:px-20">
-          {products &&
-            products.map((product) => (
+         {Array.isArray(products) && products.map((product) => (
               <Link
                 to={`/product-details/${product.slug}/${product._id}`}
                 key={product._id}

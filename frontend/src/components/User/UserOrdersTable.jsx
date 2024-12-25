@@ -16,13 +16,12 @@ const UserOrdersTable = () => {
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
 
-  const { orders, error } = useSelector((state) => state.myOrders);
+  const { orders, error } = useSelector((state) => state.myOrders);  
 
   const { loading } = useSelector((state) => state.userProfile);
 
   useEffect(() => {
     if (error) {
-      toast.error(error);
       dispatch(clearErrors());
     }
     dispatch(myOrders());

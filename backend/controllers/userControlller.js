@@ -101,15 +101,24 @@ export const signOut = async (req, res, next) => {
 export const getUserDetails = async (req, res, next) => {
   try {
     const user = await User.findById(req.user.userId);
+
     if (!user) {
       return next(ErrorHandler(404, "User not found"));
     }
-    const { password, ...rest } = user._doc;
-    res.status(200).json(rest);
+
+    const { password, ...rest } = user.toObject(); 
+
+    res.status(200).json({
+      success: true,
+      user: rest,  
+    });
+    
   } catch (error) {
-    next(error);
+    next(error); 
   }
 };
+
+
 
 export const updateUserDetails = async (req, res, next) => {
   if (!req.params.userId) {

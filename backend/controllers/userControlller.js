@@ -98,19 +98,18 @@ export const signOut = async (req, res, next) => {
   }
 };
 
-export const getUserDetails = async (req, res, next) => {
+export const getUserDetails = async (req, res) => {
   try {
-    console.log("req.user", req.user);
+    const userId = req.params.userId;
 
-    const user = await User.findById({ _id: req.user.userId }); 
+    const user = await User.findById(userId); 
 
-    console.log("user",user);
-    
     if (!user) {
-      return next(ErrorHandler(404, "User not found"));
+      return res.status(404).json({ 
+        success: false, 
+        message: 'User not found' 
+      });
     }
-
-    // const { password, ...rest } = user.toObject();
 
     res.status(200).json({
       success: true,
@@ -118,10 +117,13 @@ export const getUserDetails = async (req, res, next) => {
     });
 
   } catch (error) {
-    next(error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Error fetching user details', 
+      error: error.message 
+    }); 
   }
 };
-
 
 
 

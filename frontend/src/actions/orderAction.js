@@ -50,7 +50,7 @@ export const createOrder = (order) => async (dispatch) => {
 
 
 
-export const myOrders = () => async (dispatch) => {
+export const myOrders = (userId) => async (dispatch) => {
   try {
     dispatch(MY_ORDER_REQUEST());
 
@@ -62,7 +62,7 @@ export const myOrders = () => async (dispatch) => {
     };
 
     const { data } = await axios.get(
-      `${apiurl}/api/order/my-orders`,
+      `${apiurl}/api/order/my-orders/${userId}`,
       config
     );
     

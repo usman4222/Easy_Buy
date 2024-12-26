@@ -11,8 +11,8 @@ import { verifyToken } from "../middleware/authUser.js";
 const router = express.Router();
 
 router.route("/new-order").post(verifyToken, newOrder);
-router.route("/order-detail/:id").get(verifyToken, getSingleOrder);
-router.route("/my-orders").get(verifyToken, myOrders);
+router.route("/order-detail/:id").get(getSingleOrder);
+router.route("/my-orders/:userId").get( myOrders);
 router.route("/admin/orders").get(verifyToken, getAllOrders);
 router
   .route("/admin/update-order-status/:id")

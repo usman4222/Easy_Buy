@@ -60,7 +60,6 @@ export const newOrder = catchAsyncError(async (req, res, next) => {
   });
 });
 
-
 //get single order
 export const getSingleOrder = catchAsyncError(async (req, res, next) => {
   const order = await Order.findById(req.params.id);
@@ -76,18 +75,9 @@ export const getSingleOrder = catchAsyncError(async (req, res, next) => {
 });
 
 //get orders who logged
-export const myOrders = catchAsyncError(async (req, res, next) => { 
-
-  console.log("req.user",req.user);
+export const myOrders = catchAsyncError(async (req, res, next) => {
   
-
-  if (!req.user) {
-    return res
-      .status(401)
-      .json({ success: false, message: "User not authenticated" });
-  }
-  const orders = await Order.find({ user: req.user.userId });
-  
+  const orders = await Order.find({ user: req.params.userId });
 
   res.status(200).json({
     success: true,
@@ -97,9 +87,8 @@ export const myOrders = catchAsyncError(async (req, res, next) => {
 
 //get All Orders --Admin
 export const getAllOrders = catchAsyncError(async (req, res, next) => {
-    
   if (!req.user || req.user.role !== "admin") {
-    return next(ErrorHandler(403,"You are not allowed to get orders"));
+    return next(ErrorHandler(403, "You are not allowed to get orders"));
   }
 
   const orders = await Order.find();
@@ -123,7 +112,7 @@ export const updateOrder = catchAsyncError(async (req, res, next) => {
   const order = await Order.findById(req.params.id);
 
   if (!req.user || req.user.role !== "admin") {
-    return next(ErrorHandler(403,"You are not allowed to update order"));
+    return next(ErrorHandler(403, "You are not allowed to update order"));
   }
 
   if (!order) {
@@ -165,7 +154,7 @@ export const deleteOrder = catchAsyncError(async (req, res, next) => {
   const order = await Order.findById(req.params.id);
 
   if (!req.user || req.user.role !== "admin") {
-    return next(ErrorHandler(403,"You are not allowed to del order"));
+    return next(ErrorHandler(403, "You are not allowed to del order"));
   }
 
   if (!order) {

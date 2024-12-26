@@ -25,8 +25,9 @@ const UpdateUser = () => {
     email: "",
     profileImage: "",
   });
+  
 
-  const userId = currentUser?._id;
+  const userId = currentUser?.user._id;
 
   // Clear errors when the component mounts
   useEffect(() => {
@@ -44,9 +45,9 @@ const UpdateUser = () => {
   useEffect(() => {
     if (currentUser) {
       setUpdatedUser({
-        username: currentUser.username || "",
-        email: currentUser.email || "",
-        profileImage: currentUser.profileImage || "",
+        username: currentUser.user.username || "",
+        email: currentUser.user.email || "",
+        profileImage: currentUser.user.profileImage || "",
       });
     }
   }, [currentUser]);

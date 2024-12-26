@@ -81,7 +81,7 @@ export const register = (userData) => async (dispatch) => {
   }
 };
 
-export const myProfile = () => async (dispatch) => {
+export const myProfile = (userId) => async (dispatch) => {
   try {
     dispatch(LOAD_REQUEST());
 
@@ -92,7 +92,7 @@ export const myProfile = () => async (dispatch) => {
       withCredentials: true,
     };
 
-    const { data } = await axios.get(`${apiurl}/api/user/me`, config);
+    const { data } = await axios.get(`${apiurl}/api/user/me/${userId}`, config);
 
     dispatch(LOAD_SUCCESS(data));
   } catch (error) {
@@ -138,12 +138,9 @@ export const updateProfile = (userData, userId) => async (dispatch) => {
       userData,
       config
     );
-console.log("data",data);
 
     dispatch(UPDATE_PROFILE_SUCCESS(data));
   } catch (error) {    
-    console.log("error",error);
-    
     dispatch(UPDATE_PROFILE_FAIL(error.response?.data?.message));
   }
 };
@@ -274,7 +271,7 @@ export const updateUser = (id, userData) => async (dispatch) => {
   } catch (error) {
     dispatch(UPDATE_USER_FAIL(error.response.data.message));
   }
-};
+};s
 
 export const deleteUser = (id) => async (dispatch) => {
   try {

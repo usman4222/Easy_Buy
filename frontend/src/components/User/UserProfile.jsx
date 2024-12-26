@@ -8,13 +8,22 @@ const UserProfile = () => {
   const { currentUser: profileUser } = useSelector(
     (state) => state.myProfileInfo
   );
+  const { currentUser: loggedInUser } = useSelector(
+    (state) => state.myProfileInfo
+  );
+
+  const userId = loggedInUser?._id;
+  
+  
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(myProfile());
-  }, [dispatch]);
+    if (userId) {
+      dispatch(myProfile(userId));
+    }
+  }, [dispatch, userId]);
 
   const handleLogout = async () => {
     try {
@@ -27,7 +36,7 @@ const UserProfile = () => {
 
   return (
     <div className="h-[100vh] flex justify-center items-center">
-      <MetaData title={`${profileUser.username}'s Profile`} />
+      <MetaData title={`${profileUser.user.username}'s Profile`} />
       <div className="max-w-4xl mx-auto p-6 bg-[#f3f3f3] rounded-xl shadow-xl">
         {/* Header */}
         <div className="text-center mb-12">
@@ -44,7 +53,7 @@ const UserProfile = () => {
           {/* Profile Image */}
           <div className="mb-6 md:mb-0 md:w-48 w-36 h-36">
             <img
-              src={profileUser.profileImage}
+              src={profileUser.user.profileImage}
               alt="Profile"
               className="w-full h-full object-cover rounded-full border-2 shadow-xl"
             />
@@ -53,13 +62,13 @@ const UserProfile = () => {
           {/* Profile Information */}
           <div className="md:ml-8 text-center md:text-left">
             <h2 className="text-3xl font-semibold text-gray-800">
-              {profileUser.username}
+              {profileUser.user.username}
             </h2>
-            <p className="text-gray-600 mt-2">Email: {profileUser.email}</p>
-            <p className="text-gray-600 mt-1">Role: {profileUser.role}</p>
+            <p className="text-gray-600 mt-2">Email: {profileUser.user.email}</p>
+            <p className="text-gray-600 mt-1">Role: {profileUser.user.role}</p>
             <p className="text-gray-600 mt-1">
               Account Created At:{" "}
-              {new Date(profileUser.createdAt).toLocaleDateString("en-US", {
+              {new Date(profileUser.user.createdAt).toLocaleDateString("en-US", {
                 weekday: "long",
                 year: "numeric",
                 month: "long",

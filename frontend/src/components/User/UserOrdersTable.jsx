@@ -16,15 +16,19 @@ const UserOrdersTable = () => {
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
 
-  const { orders, error } = useSelector((state) => state.myOrders);  
+  const { orders, error } = useSelector((state) => state.myOrders);
 
   const { loading } = useSelector((state) => state.userProfile);
+
+  const userId = currentUser?._id;
 
   useEffect(() => {
     if (error) {
       dispatch(clearErrors());
     }
-    dispatch(myOrders());
+    if (userId) {
+      dispatch(myOrders(userId));
+    }
   }, [error, dispatch]);
 
   const orderInfo = (id) => {
@@ -33,7 +37,7 @@ const UserOrdersTable = () => {
 
   return (
     <div className="h-[100vh] overflow-x-auto p-10">
-       <MetaData title="My Orders" />
+      <MetaData title="My Orders" />
       <ToastContainer />
       <table className="w-full table-auto bg-[#f3f3f3] rounded-[12px]">
         <thead>

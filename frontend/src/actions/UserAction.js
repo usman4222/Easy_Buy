@@ -271,7 +271,7 @@ export const updateUser = (id, userData) => async (dispatch) => {
   } catch (error) {
     dispatch(UPDATE_USER_FAIL(error.response.data.message));
   }
-};s
+};
 
 export const deleteUser = (id) => async (dispatch) => {
   try {

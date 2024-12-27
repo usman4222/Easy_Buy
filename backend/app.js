@@ -10,10 +10,14 @@ import orderRoutes from "./routes/orderRoute.js";
 import Stripe from "stripe";
 import { ErrorHandler } from "./middleware/error.js";
 import  errorMiddleware  from "./utils/errorHandler.js";
-
+import path from "path";
+import { fileURLToPath } from "url";
 const app = express();
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Middleware
 
@@ -51,6 +55,11 @@ app.use("/api/user", userRoutes);
 app.use("/api/product", productRoutes);
 app.use("/api/order", orderRoutes);
 app.use("/api/payment", paymentRoutes);
+
+app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
+});
 
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 

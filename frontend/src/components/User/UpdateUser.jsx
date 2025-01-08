@@ -28,8 +28,7 @@ const UpdateUser = () => {
   
 
   const userId = currentUser?.user._id;
-
-  // Clear errors when the component mounts
+  
   useEffect(() => {
     if (error) {
       dispatch(clearErrors());

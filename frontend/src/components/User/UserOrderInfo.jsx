@@ -13,15 +13,17 @@ const UserOrderInfo = () => {
     (state) => state.singleOrderDetails
   );
   const { currentUser } = useSelector((state) => state.user);
+  const { shippingInfo } = useSelector((state) => state.cart)
   const dispatch = useDispatch();
   const [status, setStatus] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
-
+  
 
   useEffect(() => {
       dispatch(getOrderDetails(id));
   }, [dispatch, id]);
+  
 
   if (loading || !order) {
     return <div>Loading...</div>;
@@ -106,7 +108,7 @@ const UserOrderInfo = () => {
             <h4 className="text-[#1E293B] font-inter text-2xl font-semibold leading-[28px]">
               Order Items
             </h4>
-            {order.orderItems.map((item, index) => (
+            {order?.orderItems?.map((item, index) => (
               <div
                 key={item._id}
                 className="flex flex-col gap-2 border-b border-[#E2E8F0] pb-2"
@@ -166,7 +168,7 @@ const UserOrderInfo = () => {
                 Tax Charges
               </h6>
               <span className="text-[#14171D] font-inter text-lg font-normal leading-[22px]">
-                ${order.taxPrice.toFixed(2) || "00.0"}
+              `${(order?.taxPrice ?? 0).toFixed(2)}`
               </span>
             </div>
             <div className="flex justify-between items-center">
@@ -201,7 +203,7 @@ const UserOrderInfo = () => {
             </div>
             <div className="flex 2xl:flex-row flex-col 2xl:items-center justify-between">
               <h6 className="text-[#B0B0B0] font-inter text-[16.389px] font-medium leading-[22px]">
-                State:
+                Province:
               </h6>
               <span className="text-[#14171D] font-inter text-lg font-normal leading-[22px]">
                 {order.shippingInfo.state}

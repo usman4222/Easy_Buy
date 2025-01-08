@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  currentUser: {},
+  loggedInUser: {},
   loading: false,
   isAuthenticated: false,
   error: null,
@@ -18,7 +18,7 @@ const myProfileSlice = createSlice({
     LOAD_SUCCESS: (state, action) => { 
       state.loading = false;
       state.isAuthenticated = true;
-      state.currentUser = action.payload;
+      state.loggedInUser = action.payload;
     },
     LOAD_FAIL: (state, action) => {
       state.loading = false;

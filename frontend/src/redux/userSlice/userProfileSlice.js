@@ -57,9 +57,7 @@ const profileSlice = createSlice({
       state.isDeleted = false;
     },
 
-    UPDATE_PROFILE_FAIL: (state, action) => {    
-      console.log("action.payload",action.payload);
-        
+    UPDATE_PROFILE_FAIL: (state, action) => {            
       state.loading = false;
       state.error = action.payload;
     },

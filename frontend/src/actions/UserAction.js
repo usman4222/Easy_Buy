@@ -93,7 +93,7 @@ export const myProfile = (userId) => async (dispatch) => {
     };
 
     const { data } = await axios.get(`${apiurl}/api/user/me/${userId}`, config);
-
+    
     dispatch(LOAD_SUCCESS(data));
   } catch (error) {
     dispatch(

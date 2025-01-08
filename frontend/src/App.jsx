@@ -5,6 +5,7 @@ import Navbar from "./components/Header/Navbar";
 import FooterComponent from "./components/FooterComponent";
 import NewsLetter from "./components/NewsLetter";
 import OffersComponent from "./components/OffersComponent";
+import Test from "./Test";
 
 // Lazy loading for pages
 const LandingPage = lazy(() => import("./pages/LandingPage"));
@@ -69,6 +70,7 @@ const App = () => {
             <Route path="/my-orders" element={<UserOrdersTable />} />
             <Route path="/edit-profile" element={<UpdateUser />} />
             <Route path="/my-order-info/:id" element={<UserOrderInfo />} />
+            {/* <Route path="/test" element={<Test />} /> */}
           </Route>
 
           <Route path="/success" element={<SuccessPage />} />

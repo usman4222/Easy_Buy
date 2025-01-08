@@ -64,7 +64,7 @@ const ProductDetailsPage = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="text-center">Loading...</div>;
   }
 
   return (

@@ -16,6 +16,7 @@ const UpdateUser = () => {
   const { loading, error, isUpdated } = useSelector(
     (state) => state.userProfile
   );
+  const { loggedInUser } = useSelector((state) => state.myProfileInfo);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,10 +26,9 @@ const UpdateUser = () => {
     email: "",
     profileImage: "",
   });
-  
 
-  const userId = currentUser?.user?._id;
-  
+  const userId = loggedInUser?.user?._id;
+
   useEffect(() => {
     if (error) {
       dispatch(clearErrors());
@@ -42,14 +42,14 @@ const UpdateUser = () => {
   }, [dispatch, userId]);
 
   useEffect(() => {
-    if (currentUser) {
+    if (loggedInUser) {
       setUpdatedUser({
-        username: currentUser?.user?.username || "",
-        email: currentUser?.user?.email || "",
-        profileImage: currentUser?.user?.profileImage || "",
+        username: loggedInUser?.user?.username || "",
+        email: loggedInUser?.user?.email || "",
+        profileImage: loggedInUser?.user?.profileImage || "",
       });
     }
-  }, [currentUser]);
+  }, [loggedInUser]);
 
   const handleEditChange = (e) => {
     setUpdatedUser({
@@ -109,12 +109,11 @@ const UpdateUser = () => {
       dispatch(myProfile(userId));
       navigate("/user-profile");
     }
-
   }, [error, isUpdated, dispatch, navigate, userId]);
 
   return (
     <div className="h-[100vh] flex justify-center items-center">
-      <MetaData title={`Edit ${currentUser?.username || "User"}'s Profile`} />
+      <MetaData title={`Edit ${loggedInUser?.username || "User"}'s Profile`} />
       <ToastContainer />
       <div className="max-w-4xl mx-auto p-6 bg-[#f3f3f3] rounded-xl shadow-xl">
         <div className="text-center mb-12">
@@ -128,7 +127,7 @@ const UpdateUser = () => {
         <div className="flex flex-col md:flex-row items-center justify-center md:justify-between bg-white p-8 rounded-2xl shadow-lg">
           <div className="mb-6 md:mb-0 md:w-48 w-36 h-36">
             <img
-              src={updatedUser?.profileImage || currentUser?.profileImage}
+              src={updatedUser?.profileImage || loggedInUser?.profileImage}
               alt="Profile"
               className="w-full h-full object-cover rounded-full border-2 shadow-xl"
             />

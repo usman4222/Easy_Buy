@@ -44,9 +44,9 @@ const UpdateUser = () => {
   useEffect(() => {
     if (currentUser) {
       setUpdatedUser({
-        username: currentUser.user.username || "",
-        email: currentUser.user.email || "",
-        profileImage: currentUser.user.profileImage || "",
+        username: currentUser?.user?.username || "",
+        email: currentUser?.user?.email || "",
+        profileImage: currentUser?.user?.profileImage || "",
       });
     }
   }, [currentUser]);

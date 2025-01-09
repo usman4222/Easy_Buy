@@ -32,8 +32,8 @@ import {
   LOAD_SUCCESS,
 } from "../redux/userSlice/myProfileSlice";
 
-let apiurl = "https://easy-buy-s9rh.vercel.app"
-// let apiurl = "http://localhost:4000";
+// let apiurl = "https://easy-buy-s9rh.vercel.app"
+let apiurl = "http://localhost:4000";
 
 export const login = (userData) => async (dispatch) => {
   try {
@@ -54,6 +54,8 @@ export const login = (userData) => async (dispatch) => {
 
     dispatch(LOGIN_SUCCESS(data.user));
   } catch (error) {
+    console.log("error",error);
+    
     dispatch(LOGIN_FAIL(error.response.data.message));
   }
 };

@@ -79,7 +79,7 @@ const UserProfile = () => {
 
         {/* Action Buttons */}
         <div className="mt-10 text-center flex gap-3 justify-center">
-          <Link to={`/edit-profile`}>
+          <Link to={`/edit-profile/${userId}`}>
             <button className=" px-4 py-2 rounded-full border bg-white text-gray-700 shadow-lg transition duration-300 ease-in-out transform hover:scale-105 ">
               Edit Profile
             </button>

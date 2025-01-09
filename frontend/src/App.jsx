@@ -67,7 +67,7 @@ const App = () => {
 
             <Route path="/user-profile" element={<UserProfile />} />
             <Route path="/my-orders" element={<UserOrdersTable />} />
-            <Route path="/edit-profile" element={<UpdateUser />} />
+            <Route path="/edit-profile/:userId" element={<UpdateUser />} />
             <Route path="/my-order-info/:id" element={<UserOrderInfo />} />
           </Route>
 

@@ -13,6 +13,7 @@ const UserProfile = () => {
   );
 
   const userId = currentUser?._id
+  
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

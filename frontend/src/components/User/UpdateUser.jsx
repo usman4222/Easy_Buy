@@ -27,7 +27,7 @@ const UpdateUser = () => {
   });
   
 
-  const userId = currentUser?.user._id;
+  const userId = currentUser?.user?._id;
   
   useEffect(() => {
     if (error) {

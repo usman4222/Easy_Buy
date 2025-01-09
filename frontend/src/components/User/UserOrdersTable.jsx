@@ -48,7 +48,7 @@ const UserOrdersTable = () => {
             <th className="p-4 text-left">Total Price</th>
             <th className="p-4 text-left">Status</th>
             <th className="p-4 text-left">Shipping Price</th>
-            <th className="p-4 text-left">Actions</th>
+            {/* <th className="p-4 text-left">Actions</th> */}
           </tr>
         </thead>
         <tbody>
@@ -75,14 +75,14 @@ const UserOrdersTable = () => {
                 <td className="p-4">{order.totalPrice}</td>
                 <td className="p-4">{order.orderStatus}</td>
                 <td className="p-4">{order.shippingPrice}</td>
-                <td className="p-4 flex space-x-2">
+                {/* <td className="p-4 flex space-x-2">
                   <button
                     onClick={() => orderInfo(order._id)}
                     className="text-blue-500 hover:text-blue-700"
                   >
                     <MdOutlineReadMore />
                   </button>
-                </td>
+                </td> */}
               </tr>
             ))
           )}

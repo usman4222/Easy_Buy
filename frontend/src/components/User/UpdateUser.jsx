@@ -128,7 +128,7 @@ const UpdateUser = () => {
         <div className="flex flex-col md:flex-row items-center justify-center md:justify-between bg-white p-8 rounded-2xl shadow-lg">
           <div className="mb-6 md:mb-0 md:w-48 w-36 h-36">
             <img
-              src={updatedUser.profileImage || currentUser?.profileImage}
+              src={updatedUser?.profileImage || currentUser?.profileImage}
               alt="Profile"
               className="w-full h-full object-cover rounded-full border-2 shadow-xl"
             />
@@ -140,7 +140,7 @@ const UpdateUser = () => {
                 <input
                   type="text"
                   name="username"
-                  value={updatedUser.username}
+                  value={updatedUser?.username}
                   onChange={handleEditChange}
                   required
                   className="w-full px-4 py-2 mt-1 border rounded-md"
@@ -151,7 +151,7 @@ const UpdateUser = () => {
                 <input
                   type="email"
                   name="email"
-                  value={updatedUser.email}
+                  value={updatedUser?.email}
                   onChange={handleEditChange}
                   className="w-full px-4 py-2 mt-1 border rounded-md"
                 />

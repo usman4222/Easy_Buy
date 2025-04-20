@@ -23,28 +23,27 @@ const LoginPage = () => {
         if (!loginEmail || !loginPassword) {
             toast.error("Please fill in both email and password.");
             return;
-        }    
+        }
         dispatch(login({ email: loginEmail, password: loginPassword }));
     };
 
     useEffect(() => {
-      if (error) {
-          toast.error(error.message || error);
-          dispatch(clearErrors());
-      }
-      if (currentUser) {
-          toast.success('Login successful!');
-          navigate("/");
-      }
-  }, [error, currentUser, dispatch]);
-  
-
+        if (error) {
+            console.log("This is the error dfd:", error.message || error);
+            toast.error(error || error);
+            return
+        }
+        if (currentUser) {
+            toast.success('Login successful!');
+            navigate("/");
+        }
+    }, [error, currentUser, dispatch]);
 
 
 
     return (
         <div>
-             <MetaData title="Login" />
+            <MetaData title="Login" />
             <ToastContainer position="top-right" autoClose={3000} />
             <section className="bg-white min-h-screen flex items-center justify-center">
                 <div className="bg-white flex rounded-2xl shadow-xl max-w-3xl p-5 items-center">
@@ -90,7 +89,7 @@ const LoginPage = () => {
                             <button
                                 type="submit"
                                 className="bg-primaryRed rounded-xl text-white py-2 hover:scale-105 duration-300"
-                                // disabled={loading} 
+                            // disabled={loading} 
                             >
                                 {loading ? 'Logging in...' : 'Login'}
                             </button>

@@ -9,7 +9,8 @@ import bodyParser from "body-parser";
 import orderRoutes from "./routes/orderRoute.js";
 import Stripe from "stripe";
 import { ErrorHandler } from "./middleware/error.js";
-import  errorMiddleware  from "./utils/errorHandler.js";
+// import  errorMiddleware  from "./utils/errorHandler.js";
+import globalErrorHandler from "./middleware/globalErrorHandler.js";
 
 const app = express();
 
@@ -76,6 +77,7 @@ app.get("/test-error", (req, res, next) => {
   next(new ErrorHandler("Test Error", 500));
 });
 
-app.use(errorMiddleware);
+// app.use(errorMiddleware);
+app.use(globalErrorHandler);
 
 export default app;

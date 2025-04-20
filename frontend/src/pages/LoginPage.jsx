@@ -29,7 +29,6 @@ const LoginPage = () => {
 
     useEffect(() => {
         if (error) {
-            console.log("This is the error dfd:", error.message || error);
             toast.error(error || error);
             return
         }
